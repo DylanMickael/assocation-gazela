@@ -16,12 +16,17 @@
 <body>
     <nav class="nav-wrapper">
         <div class="container nav-container">
-            <img src="../../assets/img/logo.png" alt=""
-                style="width: 9rem; height: 3rem; margin-top: px; margin-bottom: 5px;">
-            <ul class="nav-links">
+            <img src="assets/img/logo.png" alt="Logo Gazela"
+                style="width: 9rem; height: 3rem; margin-top: 0; margin-bottom: 5px;">
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Accueil</a></li>
                 <li class="dropdown">
-                    <a href="a-propos/qui-sommes-nous/index.html">À propos ▾</a>
+                    <a href="#">À propos ▾</a>
                     <ul class="submenu">
                         <li><a href="a-propos/qui-sommes-nous/index.html">Qui sommes-nous</a>
                         </li>
@@ -68,7 +73,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="temoignage/success-stories/index.html">Témoignages ▾</a>
+                    <a href="#">Témoignages ▾</a>
                     <ul class="submenu">
                         <li><a href="temoignage/success-stories/index.html">Success
                                 Stories</a></li>
@@ -90,121 +95,73 @@
             <p>Des vies transformées, des rêves réalisés</p>
         </div>
     </header>
-    <section class="testimonial-section" style="padding: 100px 0; background: var(--white);">
+    <section class="testimonial-slider-section">
         <div class="container">
-            <div class="testimonial-slider" style="position: relative;">
+            <div class="testimonial-slider">
 
-                <div class="slide active"
-                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
-                    <div style="position: relative; order: 1;">
-                        <img src="../../assets/img/gazela_hero_madagascar.png" alt="Benjaniaina"
-                            style="border-radius: var(--radius-lg); box-shadow: 20px 20px 0 var(--accent); width: 100%; object-fit: cover; aspect-ratio: 4/3;">
-                        <div
-                            style="position: absolute; bottom: -20px; left: -20px; background: var(--white); padding: 15px 25px; border-radius: var(--radius-md); box-shadow: var(--shadow);">
-                            <i class="fas fa-quote-left" style="color: var(--primary); font-size: 1.5rem;"></i>
+                <div class="slide active">
+                    <div class="slide-image-wrapper">
+                        <img src="../../assets/img/gazela_hero_madagascar.png" alt="Benjaniaina">
+                        <div class="slide-quote-badge">
+                            <i class="fas fa-quote-left"></i>
                         </div>
                     </div>
 
-                    <div style="order: 2;">
+                    <div class="slide-info">
                         <span class="section-subtitle">TÉMOIGNAGE</span>
                         <h2 class="section-title">Benjaniaina ANDRIANOROMALALA</h2>
-                        <p
-                            style="font-size: 1.2rem; color: var(--text-dark); line-height: 1.8; font-style: italic; margin-bottom: 30px;">
+                        <p class="slide-text">
                             "Gazela me donne de la force, me pousse à être plus positif, me donne des leçons de vie
                             comme le fait d'assumer davantage mes responsabilités, et enfin, m'aide à soigner les
                             blessures du passé."
                         </p>
-                        <div
-                            style="background: var(--bg-light); padding: 20px; border-radius: var(--radius-md); border-left: 5px solid var(--primary);">
-                            <p style="font-weight: 700; color: var(--primary); margin: 0;">Bénéficiaire Gazela</p>
-                            <p style="font-size: 0.9rem; margin: 0; color: var(--text-muted);">Success Story #1</p>
+                        <div class="slide-author-box">
+                            <p class="slide-author-name">Bénéficiaire Gazela</p>
+                            <p class="slide-author-title">Success Story #1</p>
                         </div>
                     </div>
                 </div>
 
-                <button class="slider-arrow prev-arrow"
-                    style="position: absolute; left: -60px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 2rem; color: var(--primary); cursor: pointer;">
+                <div class="slide">
+                    <div class="slide-image-wrapper">
+                        <img src="../../assets/img/gazela_hero_madagascar.png" alt="Benjaniaina">
+                        <div class="slide-quote-badge">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                    </div>
+
+                    <div class="slide-info">
+                        <span class="section-subtitle">TÉMOIGNAGE</span>
+                        <h2 class="section-title">Benjaniaina ANDRIANOROMALALA</h2>
+                        <p class="slide-text">
+                            "Gazela me donne de la force, me pousse à être plus positif, me donne des leçons de vie
+                            comme le fait d'assumer davantage mes responsabilités, et enfin, m'aide à soigner les
+                            blessures du passé."
+                        </p>
+                        <div class="slide-author-box">
+                            <p class="slide-author-name">Bénéficiaire Gazela</p>
+                            <p class="slide-author-title">Success Story #2</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-arrow prev-arrow" aria-label="Précédent">
                     <i class="fas fa-chevron-left"></i>
                 </button>
-                <button class="slider-arrow next-arrow"
-                    style="position: absolute; right: -60px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 2rem; color: var(--primary); cursor: pointer;">
+                <button class="slider-arrow next-arrow" aria-label="Suivant">
                     <i class="fas fa-chevron-right"></i>
                 </button>
 
-                <div class="slider-dots" style="text-align: center; margin-top: 40px;">
-                    <span class="dot active" onclick="currentSlide(1)"
-                        style="display: inline-block; width: 12px; height: 12px; margin: 0 5px; background: var(--primary); border-radius: 50%; cursor: pointer;"></span>
-                    <span class="dot" onclick="currentSlide(2)"
-                        style="display: inline-block; width: 12px; height: 12px; margin: 0 5px; background: var(--text-muted); border-radius: 50%; cursor: pointer;"></span>
-                    <span class="dot" onclick="currentSlide(3)"
-                        style="display: inline-block; width: 12px; height: 12px; margin: 0 5px; background: var(--text-muted); border-radius: 50%; cursor: pointer;"></span>
+                <div class="slider-dots">
+                    <span class="dot active" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Script for Slider -->
-    <script>
-        let slideIndex = 1;
-
-        // Auto slide interval
-        let slideInterval = setInterval(() => {
-            changeSlide(1);
-        }, 8000); // Change every 8 seconds
-
-        // Event listeners for arrows
-        document.querySelector('.prev-arrow').addEventListener('click', () => {
-            changeSlide(-1);
-            resetInterval();
-        });
-
-        document.querySelector('.next-arrow').addEventListener('click', () => {
-            changeSlide(1);
-            resetInterval();
-        });
-
-        function resetInterval() {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(() => {
-                changeSlide(1);
-            }, 8000);
-        }
-
-        function changeSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-            resetInterval();
-        }
-
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("slide");
-            let dots = document.getElementsByClassName("dot");
-
-            if (n > slides.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = slides.length }
-
-            for (i = 0; i < slides.length; i++) {
-                slides[i].classList.remove("active");
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].classList.remove("active");
-            }
-
-            slides[slideIndex - 1].style.display = "grid";
-            // Use setTimeout to allow the display:grid to apply before adding active class for opacity transition if needed
-            // But CSS animation handles it on class add
-            setTimeout(() => {
-                slides[slideIndex - 1].classList.add("active");
-            }, 10);
-
-            dots[slideIndex - 1].classList.add("active");
-        }
-    </script>
+    <script src="../../assets/js/slide.js"></script>
 
     <!-- Local Volunteers -->
     <section style="background: var(--bg-light);">
@@ -214,7 +171,7 @@
                 <h2 class="section-title">Bénévoles Malgaches</h2>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
+            <div class="volunteers-grid">
                 <div
                     style="background: white; padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow);">
                     <p style="font-style: italic; margin-bottom: 20px; color: var(--text-dark);">
@@ -280,8 +237,7 @@
                 <h2 class="section-title">Bénévoles Internationaux</h2>
             </div>
 
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto;">
+            <div class="volunteers-grid-alt">
                 <div style="background: var(--bg-light); padding: 35px; border-radius: var(--radius-md);">
                     <p style="font-style: italic; margin-bottom: 20px; color: var(--text-dark); font-size: 1.05rem;">
                         "J'ai souhaité mettre à profit tout ce que j'ai appris au sein d'un projet pouvant réellement
@@ -360,6 +316,7 @@
             </div>
         </div>
     </footer>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
