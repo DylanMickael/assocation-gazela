@@ -1,0 +1,7 @@
+# Pinegrow web editor files
+_pgbackup/
+_pginfo/
+pinegrow.json
+pinegrow/
+pingrow/
+*.pdf

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport d'Activités | Association Gazela</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* MODULAR REPORTING SYSTEM */
+
+        /* Spacing Utilities */
+        .mb-small {
+            margin-bottom: 20px;
+        }
+
+        .mb-medium {
+            margin-bottom: 40px;
+        }
+
+        .mb-large {
+            margin-bottom: 80px;
+        }
+
+        /* Module: Stat Grid */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow);
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 10px 0;
+        }
+
+        .icon-accent {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* Module: Activity Block */
+        .activity-block {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+
+        .activity-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .block-title {
+            margin: 0;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .block-summary {
+            max-width: 500px;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: right;
+        }
+
+        /* Module: Data Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .badge-year {
+            background: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        /* Module: Cards Grid */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .module-card {
+            background: var(--bg-light);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card-header {
+            padding: 20px;
+            background: white;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .card-header h4 {
+            margin: 0;
+        }
+
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list span {
+            color: var(--text-muted);
+        }
+
+        /* Module: Check List */
+        .check-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .check-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        .check-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .block-summary {
+                text-align: left;
+            }
+
+            .activity-header-row {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-wrapper">
+        <div class="container nav-container">
+            <img src="/assets/img/gazela.avif" alt=""
+                style="width: 9rem; height: 3rem; margin-top: px; margin-bottom: 5px;">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Accueil</a></li>
+                <li class="dropdown">
+                    <a href="../../a-propos/qui-sommes-nous/index.html">À propos ▾</a>
+                    <ul class="submenu">
+                        <li><a href="../../a-propos/qui-sommes-nous/index.html">Qui sommes-nous</a></li>
+                        <li><a href="../../a-propos/valeurs-missions/index.html">Mission & Valeurs</a></li>
+                        <li><a href="../../a-propos/actualites/index.html">Actualités</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Nos Projets ▾</a>
+                    <ul class="submenu">
+                        <li><a href="../../nos-projets/projet-tanora-1/index.html">Projet Tanora 1</a></li>
+                        <li><a href="../../nos-projets/projet-tanora-2/index.html">Projet Tanora 2</a></li>
+                        <li><a href="../../nos-projets/formation-professionnelle/index.html">Formation
+                                Professionnelle</a></li>
+                        <li><a href="../../nos-projets/atelier-parents-enfant/index.html">Atelier Parents-Enfant</a>
+                        </li>
+                        <li><a href="../../nos-projets/bibliotheque-ambulante/index.html">Bibliothèque Ambulante</a>
+                        </li>
+                        <li><a href="../../nos-projets/bibliotheque-pour-tous/index.html">Bibliothèque Pour Tous</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Agir avec nous ▾</a>
+                    <ul class="submenu">
+                        <li><a href="../../agir-avec-nous/annonces/index.html">Annonces</a></li>
+                        <li><a href="../../agir-avec-nous/devenir-partenaire/index.html">Devenir Partenaire</a></li>
+                        <li><a href="../../agir-avec-nous/devenir-membre/index.html">Devenir Membre</a></li>
+                        <li><a href="../../agir-avec-nous/devenir-benevole/index.html">Devenir Bénévole</a></li>
+                        <li><a href="../../agir-avec-nous/devenir-volontaire/index.html">Devenir Volontaire</a></li>
+                        <li><a href="https://www.leetchi.com/fr/c/cagnotte-gazela-1494193" target="_blank">Faire un
+                                don</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="../../temoignage/success-stories/index.html">Témoignages ▾</a>
+                    <ul class="submenu">
+                        <li><a href="../../temoignage/success-stories/index.html">Success Stories</a></li>
+                        <li><a href="../../temoignage/rapport-activites/index.html">Rapport d'activités</a></li>
+                        <li><a href="../../temoignage/rapport-financier/index.html">Rapport financier</a></li>
+                    </ul>
+                </li>
+                <li style="margin-left: 20px;"><a href="https://www.leetchi.com/fr/c/cagnotte-gazela-1494193"
+                        target="_blank" class="btn btn-primary">Faire un don</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero"
+        style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../assets/img/gazela_hero_madagascar.png'); background-size: cover; background-position: center; height: 50vh;">
+        <div class="hero-content animate">
+            <h1>Rapport <span>d'Activités</span></h1>
+            <p>Transparence, résultats et impact concret sur le terrain</p>
+        </div>
+    </header>
+
+    <div class="container" style="padding: 80px 15px;">
+
+        <!-- MODULE: GLOBAL STATS -->
+        <!-- Copy this block to add a new stats section -->
+        <section class="report-section mb-large">
+            <div class="text-center mb-medium">
+                <span class="section-subtitle">Aperçu Global</span>
+                <h2 class="section-title">Chiffres Clés</h2>
+            </div>
+            <div class="stat-grid">
+                <!-- Stat Item -->
+                <div class="stat-card">
+                    <i class="fas fa-user-graduate icon-accent"></i>
+                    <span class="stat-number">74</span>
+                    <p class="stat-label">Jeunes Formés (PFP/FP)</p>
+                </div>
+                <!-- Stat Item -->
+                <div class="stat-card">
+                    <i class="fas fa-book-reader icon-accent"></i>
+                    <span class="stat-number">53 000+</span>
+                    <p class="stat-label">Lecteurs Touchés</p>
+                </div>
+                <!-- Stat Item -->
+                <div class="stat-card">
+                    <i class="fas fa-briefcase icon-accent"></i>
+                    <span class="stat-number">80%</span>
+                    <p class="stat-label">Taux d'Insertion</p>
+                </div>
+                <!-- Stat Item -->
+                <div class="stat-card">
+                    <i class="fas fa-hands-helping icon-accent"></i>
+                    <span class="stat-number">3</span>
+                    <p class="stat-label">Sites Parents-Enfant</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE: DETAILED ACTIVITY (Formation) -->
+        <!-- Use class 'activity-block' for distinct sections -->
+        <section class="activity-block mb-large">
+            <div class="activity-header-row">
+                <div>
+                    <span class="tag">Formation Professionnelle</span>
+                    <h3 class="block-title">Préformations et Formations (PFP & FP)</h3>
+                </div>
+                <div class="block-summary">
+                    <p>74 jeunes formés sur 127 bénéficiaires total. Taux d'insertion stable de 80%.</p>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Année</th>
+                            <th>Promotion</th>
+                            <th>Effectif Total</th>
+                            <th>Répartition (F/G)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Row -->
+                        <tr>
+                            <td><span class="badge-year">2021</span></td>
+                            <td>VITA SEDRA</td>
+                            <td>23 jeunes</td>
+                            <td>10 Filles, 13 Garçons</td>
+                        </tr>
+                        <!-- Row -->
+                        <tr>
+                            <td><span class="badge-year">2022</span></td>
+                            <td>V1 / FANANTENANA</td>
+                            <td>30 jeunes</td>
+                            <td>12 Filles, 18 Garçons</td>
+                        </tr>
+                        <!-- Row -->
+                        <tr>
+                            <td><span class="badge-year">2023</span></td>
+                            <td>WINNERS / V1</td>
+                            <td>24 jeunes</td>
+                            <td>11 Filles, 13 Garçons</td>
+                        </tr>
+                        <!-- Row -->
+                        <tr>
+                            <td><span class="badge-year">2023</span></td>
+                            <td>MIONJO / V2</td>
+                            <td>36 jeunes</td>
+                            <td>20 Filles, 16 Garçons</td>
+                        </tr>
+                        <!-- Row -->
+                        <tr>
+                            <td><span class="badge-year">2024</span></td>
+                            <td>VOROMAHERY / V1</td>
+                            <td>22 jeunes</td>
+                            <td>13 Filles, 9 Garçons</td>
+                        </tr>
+                        <!-- Row -->
+                        <tr>
+                            <td><span class="badge-year">2024</span></td>
+                            <td>TAFITA / V2 & V3</td>
+                            <td>33 jeunes</td>
+                            <td>17 Filles, 16 Garçons</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- MODULE: CARDS GRID (Libraries & Community) -->
+        <section class="activity-block mb-large">
+            <div class="text-center mb-medium">
+                <span class="section-subtitle">Culture & Société</span>
+                <h2 class="section-title">Programmes Communautaires</h2>
+            </div>
+
+            <div class="grid-3">
+                <!-- Card 1: BMV -->
+                <div class="module-card">
+                    <div class="card-header">
+                        <i class="fas fa-truck card-icon"></i>
+                        <h4>Bibliothèque Ambulante</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="info-list">
+                            <li><span>Lecteurs</span> <strong>~20 000</strong></li>
+                            <li><span>Cible</span> <strong>Enfants, Jeunes, Adultes</strong></li>
+                            <li><span>Équipe</span> <strong>4 animateurs/séance</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 2: BPT -->
+                <div class="module-card">
+                    <div class="card-header">
+                        <i class="fas fa-book-open card-icon"></i>
+                        <h4>Bibliothèque Pour Tous</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="info-list">
+                            <li><span>Période</span> <strong>2018 - 2020</strong></li>
+                            <li><span>Sites</span> <strong>14 bibliothèques</strong></li>
+                            <li><span>Lecteurs</span> <strong>~33 000</strong></li>
+                            <li><span>Fonds</span> <strong>+80 références</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 3: APE -->
+                <div class="module-card">
+                    <div class="card-header">
+                        <i class="fas fa-users card-icon"></i>
+                        <h4>Atelier Parents-Enfant</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="info-list">
+                            <li><span>Début</span> <strong>Oct 2019</strong></li>
+                            <li><span>Reprise</span> <strong>2021</strong></li>
+                            <li><span>Sites</span> <strong>3 (Itaosy, Soamiampita...)</strong></li>
+                            <li><span>Effectif</span> <strong>10-15 inscrits/site</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE: LIST (Impact) -->
+        <section class="activity-block">
+            <div class="activity-header-row">
+                <div>
+                    <span class="tag">Impact Social</span>
+                    <h3 class="block-title">Actions Citoyennes & Résultats</h3>
+                </div>
+                <div class="block-summary">
+                    <p><strong>VISIBILITÉ, INSPIRATIONS et ASPIRATIONS</strong> pour la communauté.</p>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <!-- Column 1 -->
+                <div>
+                    <h4 style="margin-bottom: 20px; color: var(--primary);">Impacts Qualitatifs</h4>
+                    <ul class="check-list">
+                        <li><strong>Alphabétisation :</strong> Apprentissage de l'alphabet malagasy.</li>
+                        <li><strong>Éducation :</strong> Progrès scolaire des enfants et motivation accrue.</li>
+                        <li><strong>Environnement :</strong> Sensibilisation et plantation (Arbres fruitiers).</li>
+                        <li><strong>Stabilité :</strong> 80% des jeunes formés ont une situation stable.</li>
+                    </ul>
+                </div>
+                <!-- Column 2 -->
+                <div>
+                    <h4 style="margin-bottom: 20px; color: var(--primary);">Actions Concrètes</h4>
+                    <ul class="check-list">
+                        <li>Nettoyage des allées, ruelles et environs.</li>
+                        <li>Nettoyage et peinture salle pédiatrie Hôpital d'Itaosy (par la Vague 6 Gazela, <strong>Club
+                                Vonona</strong>).</li>
+                        <li>Visites d'entreprises et ateliers sur le genre animés par les jeunes.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <span class="footer-logo">Gazela</span>
+                    <p class="footer-desc">Association loi 1901 œuvrant pour le développement social et l'éducation des
+                        enfants à Madagascar depuis 2011.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="/index.html">Accueil</a></li>
+                        <li><a href="/a-propos/qui-sommes-nous/index.html">À Propos</a></li>
+                        <li><a href="/temoignage/success-stories/index.html">Témoignages</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Agir</h4>
+                    <ul class="footer-links">
+                        <li><a href="/agir-avec-nous/don/index.html">Faire un don</a></li>
+                        <li><a href="/agir-avec-nous/devenir-volontaire/index.html">Bénévolat</a></li>
+                        <li><a href="/agir-avec-nous/devenir-partenaire/index.html">Partenaires</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Contact</h4>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">
+                        Lot IJJ 13126 A, Antanjona<br>
+                        Antananarivo, Madagascar<br><br>
+                        association.gazela@gmail.com
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Association Gazela. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

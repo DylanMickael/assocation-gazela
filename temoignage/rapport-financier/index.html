@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport Financier | Association Gazela</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* MODULAR REPORTING SYSTEM (Shared across reports) */
+
+        /* Spacing Utilities */
+        .mb-small {
+            margin-bottom: 20px;
+        }
+
+        .mb-medium {
+            margin-bottom: 40px;
+        }
+
+        .mb-large {
+            margin-bottom: 80px;
+        }
+
+        /* Module: Stat Grid (Used for KPI) */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow);
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 10px 0;
+        }
+
+        .icon-accent {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* Module: Activity Block (Used for main sections) */
+        .activity-block {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+
+        .activity-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .report-section {
+            background: transparent;
+        }
+
+        /* Wrapper for section spacing */
+
+        /* Tags & Titles */
+        .tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .block-title {
+            margin: 0;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .block-summary {
+            max-width: 500px;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: right;
+        }
+
+        /* Module: Cards Grid */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .module-card {
+            background: white;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: var(--shadow);
+        }
+
+        .card-body {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        /* Module: Lists */
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list span {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .check-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .check-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        .check-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .block-summary {
+                text-align: left;
+            }
+
+            .activity-header-row {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-wrapper">
+        <div class="container nav-container">
+            <img src="/assets/img/gazela.avif" alt=""
+                style="width: 9rem; height: 3rem; margin-top: px; margin-bottom: 5px;">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Accueil</a></li>
+                <li class="dropdown">
+                    <a href="../../a-propos/qui-sommes-nous/index.html">À propos ▾</a>
+                    <ul class="submenu">
+                        <li><a href="../../a-propos/qui-sommes-nous/index.html">Qui sommes-nous</a></li>
+                        <li><a href="../../a-propos/valeurs-missions/index.html">Mission & Valeurs</a></li>
+                        <li><a href="../../a-propos/actualites/index.html">Actualités</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Nos Projets ▾</a>
+                    <ul class="submenu">
+                        <li><a href="../../nos-projets/projet-tanora-1/index.html">Projet Tanora 1</a></li>
+                        <li><a href="../../nos-projets/projet-tanora-2/index.html">Projet Tanora 2</a></li>
+                        <li><a href="../../nos-projets/formation-professionnelle/index.html">Formation
+                                Professionnelle</a></li>
+                        <li><a href="../../nos-projets/atelier-parents-enfant/index.html">Atelier Parents-Enfant</a>
+                        </li>
+                        <li><a href="../../nos-projets/bibliotheque-ambulante/index.html">Bibliothèque Ambulante</a>
+                        </li>
+                        <li><a href="../../nos-projets/bibliotheque-pour-tous/index.html">Bibliothèque Pour Tous</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Agir avec nous ▾</a>
+                    <ul class="submenu">
+                        <li><a href="../../agir-avec-nous/annonces/index.html">Annonces</a></li>
+                        <li><a href="../../agir-avec-nous/devenir-partenaire/index.html">Devenir Partenaire</a></li>
+                        <li><a href="../../agir-avec-nous/devenir-membre/index.html">Devenir Membre</a></li>
+                        <li><a href="../../agir-avec-nous/devenir-benevole/index.html">Devenir Bénévole</a></li>
+                        <li><a href="../../agir-avec-nous/devenir-volontaire/index.html">Devenir Volontaire</a></li>
+                        <li><a href="https://www.leetchi.com/fr/c/cagnotte-gazela-1494193" target="_blank">Faire un
+                                don</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="../../temoignage/success-stories/index.html">Témoignages ▾</a>
+                    <ul class="submenu">
+                        <li><a href="../../temoignage/success-stories/index.html">Success Stories</a></li>
+                        <li><a href="../../temoignage/rapport-activites/index.html">Rapport d'activités</a></li>
+                        <li><a href="../../temoignage/rapport-financier/index.html">Rapport financier</a></li>
+                    </ul>
+                </li>
+                <li style="margin-left: 20px;"><a href="https://www.leetchi.com/fr/c/cagnotte-gazela-1494193"
+                        target="_blank" class="btn btn-primary">Faire un don</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero"
+        style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../assets/img/mission_bg.png'); background-size: cover; background-position: center; height: 50vh;">
+        <div class="hero-content animate">
+            <h1>Rapport <span>Financier</span></h1>
+            <p>Transparence et gestion rigoureuse de vos dons</p>
+        </div>
+    </header>
+
+    <div class="container" style="padding: 80px 15px;">
+
+        <!-- MODULE: SUMMARY REPORT -->
+        <section class="report-section mb-large">
+            <div class="text-center mb-medium">
+                <span class="section-subtitle">Financement & Transparence</span>
+                <h2 class="section-title">Bilan 2021 - 2025</h2>
+                <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted);">
+                    Grâce au soutien de nos partenaires majeurs, nous avons pu sécuriser les financements nécessaires
+                    pour nos projets structurants TANORA.
+                </p>
+            </div>
+
+            <div class="grid-2">
+                <!-- Project Module 1 -->
+                <div class="module-card" style="background: white; border-top: 5px solid var(--accent);">
+                    <div class="card-body text-center">
+                        <span class="tag">PROJET TANORA 1</span>
+                        <h3 style="margin-top: 15px; margin-bottom: 5px;">Financement Acquis</h3>
+
+                        <div style="font-size: 3rem; font-weight: 800; color: var(--text-dark); margin: 20px 0;">
+                            25 560 <span style="font-size: 0.5em; color: var(--text-muted);">€</span>
+                        </div>
+
+                        <ul class="check-list" style="text-align: left; margin-top: 30px;">
+                            <li>Fonds alloués à l'insertion professionnelle.</li>
+                            <li>Formation et équipements.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Project Module 2 -->
+                <div class="module-card" style="background: white; border-top: 5px solid var(--primary);">
+                    <div class="card-body text-center">
+                        <span class="tag" style="background: var(--primary);">PROJET TANORA 2</span>
+                        <h3 style="margin-top: 15px; margin-bottom: 5px;">Financement Acquis</h3>
+
+                        <div style="font-size: 3rem; font-weight: 800; color: var(--text-dark); margin: 20px 0;">
+                            65 319 <span style="font-size: 0.5em; color: var(--text-muted);">€</span>
+                        </div>
+
+                        <ul class="check-list" style="text-align: left; margin-top: 30px;">
+                            <li>Expansion des activités (Vagues 2 & 3).</li>
+                            <li>Pérennisation des structures d'accueil.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE: HISTORICAL DATA -->
+        <section class="activity-block">
+            <div class="activity-header-row">
+                <div>
+                    <span class="tag" style="background: var(--text-dark);">Archive</span>
+                    <h3 class="block-title">Historique 2016 - 2020</h3>
+                </div>
+                <div class="block-summary">
+                    <p>Fonds propres et solidarité locale avant les subventions internationales.</p>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <!-- Key Stat -->
+                <div style="display: flex; flex-direction: column; justify-content: center;">
+                    <p style="font-size: 1.1rem; margin-bottom: 30px;">
+                        Avant les grands financements, Gazela a fonctionné grâce à la solidarité locale et l'engagement
+                        de ses membres.
+                    </p>
+                    <div class="module-card"
+                        style="padding: 30px; border-left: 5px solid var(--primary); background: var(--bg-light);">
+                        <span
+                            style="text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; color: var(--text-muted);">Total
+                            Fonds Levés</span>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-top: 10px;">
+                            29 300 000 <span style="font-size: 0.4em; color: var(--text-dark);">MGA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Source List -->
+                <div>
+                    <h4 style="margin-bottom: 20px;">Sources de Financement</h4>
+                    <ul class="info-list">
+                        <li>
+                            <span><i class="fas fa-hands-helping" style="color: var(--accent); margin-right: 10px;"></i>
+                                Apports bénéficiaires</span>
+                            <i class="fas fa-check-circle" style="color: var(--primary);"></i>
+                        </li>
+                        <li>
+                            <span><i class="fas fa-donate" style="color: var(--accent); margin-right: 10px;"></i> Dons
+                                partenaires privés</span>
+                            <i class="fas fa-check-circle" style="color: var(--primary);"></i>
+                        </li>
+                        <li>
+                            <span><i class="fas fa-users" style="color: var(--accent); margin-right: 10px;"></i>
+                                Subventions associations</span>
+                            <i class="fas fa-check-circle" style="color: var(--primary);"></i>
+                        </li>
+                        <li>
+                            <span><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 10px;"></i>
+                                Événements caritatifs</span>
+                            <i class="fas fa-check-circle" style="color: var(--primary);"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <span class="footer-logo">Gazela</span>
+                    <p class="footer-desc">Association loi 1901 œuvrant pour le développement social et l'éducation des
+                        enfants à Madagascar depuis 2011.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="/index.html">Accueil</a></li>
+                        <li><a href="/a-propos/qui-sommes-nous/index.html">À Propos</a></li>
+                        <li><a href="/temoignage/success-stories/index.html">Témoignages</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Agir</h4>
+                    <ul class="footer-links">
+                        <li><a href="/agir-avec-nous/don/index.html">Faire un don</a></li>
+                        <li><a href="/agir-avec-nous/devenir-volontaire/index.html">Bénévolat</a></li>
+                        <li><a href="/agir-avec-nous/devenir-partenaire/index.html">Partenaires</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Contact</h4>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">
+                        Lot IJJ 13126 A, Antanjona<br>
+                        Antananarivo, Madagascar<br><br>
+                        association.gazela@gmail.com
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Association Gazela. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
