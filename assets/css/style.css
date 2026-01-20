@@ -316,7 +316,7 @@ section {
     justify-content: center;
     text-align: center;
     color: var(--white);
-    border-radius: 0 0 50px 50px;
+    border-radius: 0 0 2px 2px;
 }
 
 .hero-content {

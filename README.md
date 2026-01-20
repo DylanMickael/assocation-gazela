@@ -1,6 +1,6 @@
 # Association Gazela - Plateforme Web
 
-![Logo Association Gazela](assets/img/gazela.avif)
+![Logo Association Gazela](../../assets/img/logo.png)
 
 ## 🌍 À propos de Gazela
 L'**Association Gazela** est une organisation loi 1901 œuvrant pour le développement social et l'éducation des enfants à Madagascar depuis 2011. Ce projet web est la vitrine officielle de l'association, conçue pour présenter ses actions, engager des bénévoles et faciliter les dons.
@@ -34,7 +34,7 @@ Le site est construit avec une approche **"Vanilla First"** pour garantir perfor
 ├── nos-projets/                # Détails des programmes (Tanora, Bibliothèque...)
 ├── agir-avec-nous/             # Recrutement bénévoles, membres, partenaires
 ├── temoignage/                 # Success stories et Rapports annuels
-└── assets/
+└── ../../assets/
     ├── css/style.css           # Design system et composants
     ├── js/                     # Scripts (main, blog, sliders)
     └── img/                    # Ressources visuelles optimisées
@@ -48,4 +48,4 @@ Aucune installation de dépendance n'est nécessaire. Le projet fonctionne "out-
 3. Pour le développement CSS, les variables sont centralisées dans `:root` au début de `style.css`.
 
 ---
-© 2025 Association Gazela. *Engagés pour l'avenir de Madagascar.*
+© 2026 Association Gazela. *Engagés pour l'avenir de Madagascar.*
