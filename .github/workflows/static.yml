@@ -1,0 +1,31 @@
+name: Deploy to InfinityFree
+
+on:
+  push:
+    branches:
+      - main  # Vérifie bien que ta branche s'appelle main (ou master)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Checkout du code
+        uses: actions/checkout@v4
+
+      - name: 🚀 Déploiement FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          local-dir: ./
+          server-dir: ./htdocs/
+          # Optionnel : supprime les fichiers sur le serveur s'ils n'existent plus sur GitHub
+          delete-clean: false 
+          # Exclure les fichiers inutiles pour le site web
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/README.md
+            .github/**
