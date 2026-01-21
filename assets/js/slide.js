@@ -7,12 +7,12 @@ let slideInterval = setInterval(() => {
 
 // Event listeners for arrows
 document.querySelector('.prev-arrow').addEventListener('click', () => {
-    changeSlide(1);
+    changeSlide(-1);
     resetInterval();
 });
 
 document.querySelector('.next-arrow').addEventListener('click', () => {
-    changeSlide(-1);
+    changeSlide(1);
     resetInterval();
 });
 
@@ -24,7 +24,7 @@ function resetInterval() {
 }
 
 function changeSlide(n) {
-    showSlides(slideIndex = n);
+    showSlides(slideIndex += n);
 }
 
 function currentSlide(n) {

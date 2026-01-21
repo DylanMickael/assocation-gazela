@@ -5,425 +5,549 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rapport Financier</title>
-
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/animations.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/taiwind.config.js"></script>
     <script src="../../assets/js/head.js"></script>
-    <style>
-        /* MODULAR REPORTING SYSTEM (Shared across reports) */
-
-        /* Spacing Utilities */
-        .mb-small {
-            margin-bottom: 20px;
-        }
-
-        .mb-medium {
-            margin-bottom: 40px;
-        }
-
-        .mb-large {
-            margin-bottom: 80px;
-        }
-
-        /* Module: Stat Grid (Used for KPI) */
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow);
-            text-align: center;
-            border-bottom: 4px solid var(--primary);
-            transition: transform 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            display: block;
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin: 10px 0;
-        }
-
-        .icon-accent {
-            font-size: 2rem;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-
-        /* Module: Activity Block (Used for main sections) */
-        .activity-block {
-            background: white;
-            padding: 40px;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow);
-        }
-
-        .activity-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--bg-light);
-            padding-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .report-section {
-            background: transparent;
-        }
-
-        /* Wrapper for section spacing */
-
-        /* Tags & Titles */
-        .tag {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .block-title {
-            margin: 0;
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-
-        .block-summary {
-            max-width: 500px;
-            color: var(--text-muted);
-            font-style: italic;
-            text-align: right;
-        }
-
-        /* Module: Cards Grid */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        .module-card {
-            background: white;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            box-shadow: var(--shadow);
-        }
-
-        .card-body {
-            padding: 30px;
-            flex-grow: 1;
-        }
-
-        /* Module: Lists */
-        .info-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .info-list li {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px dashed #ccc;
-        }
-
-        .info-list li:last-child {
-            border-bottom: none;
-        }
-
-        .info-list span {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .check-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .check-list li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 12px;
-        }
-
-        .check-list li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        @media (max-width: 768px) {
-            .block-summary {
-                text-align: left;
-            }
-
-            .activity-header-row {
-                display: block;
-            }
-        }
-    </style>
 </head>
 
 <body>
-    <nav class="nav-wrapper">
-        <div class="container nav-container">
-            <img src="assets/img/logo.png" alt="Logo Gazela"
-                style="width: 9rem; height: 3rem; margin-top: 0; margin-bottom: 5px;">
-            <input type="checkbox" id="menu-toggle" class="menu-toggle">
-            <label for="menu-toggle" class="menu-icon">
-                <span class="navicon"></span>
-            </label>
-            <div class="menu-overlay"></div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="">Accueil</a></li>
-                <li class="dropdown">
-                    <a href="#">À propos ▾</a>
-                    <ul class="submenu">
-                        <li><a href="a-propos/qui-sommes-nous/">Qui sommes-nous</a></li>
-                        <li><a href="a-propos/valeurs-missions/">Mission & Valeurs</a>
-                        </li>
-                        <li><a href="a-propos/actualites/">Actualités</a></li>
-                        <li><a href="a-propos/nous-contacter/">Nous contacter</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">Nos Projets ▾</a>
-                    <ul class="submenu">
-                        <li><a href="nos-projets/projet-tanora-1/">Projet Tanora 1</a>
-                        </li>
-                        <li><a href="nos-projets/projet-tanora-2/">Projet Tanora 2</a>
-                        </li>
-                        <li><a href="nos-projets/formation-professionnelle/">Formation
-                                Professionnelle</a>
-                        </li>
-                        <li><a href="nos-projets/atelier-parents-enfant/">Atelier
-                                Parents-Enfant</a></li>
-                        <li><a href="nos-projets/bibliotheque-ambulante/">Bibliothèque
-                                Ambulante</a></li>
-                        <li><a href="nos-projets/bibliotheque-pour-tous/">Bibliothèque
-                                Pour Tous</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">Agir avec nous ▾</a>
-                    <ul class="submenu">
-                        <li><a href="agir-avec-nous/annonces/">Annonces</a></li>
-                        <li><a href="agir-avec-nous/devenir-partenaire/">Devenir
-                                Partenaire</a></li>
-                        <li><a href="agir-avec-nous/devenir-membre/">Devenir Membre</a>
-                        </li>
-                        <li><a href="agir-avec-nous/devenir-benevole/">Devenir
-                                Bénévole</a></li>
-                        <li><a href="agir-avec-nous/devenir-volontaire/">Devenir
-                                Volontaire</a></li>
-                        <li><a href="https://www.leetchi.com/fr/c/cagnotte-gazela-1494193" target="_blank">Faire un
-                                don</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">Témoignages ▾</a>
-                    <ul class="submenu">
-                        <li><a href="temoignage/success-stories/">Success Stories</a></li>
-                        <li><a href="temoignage/rapport-activites/">Rapport
-                                d'activités</a></li>
-                        <li><a href="temoignage/rapport-financier/">Rapport financier</a>
-                        </li>
-                    </ul>
-                </li>
-                <li style="margin-left: 20px;"><a href="https://www.leetchi.com/fr/c/cagnotte-gazela-1494193"
-                        target="_blank" class="btn btn-primary">Faire un
-                        don</a></li>
-            </ul>
+    <nav class="sticky bg-white/95 backdrop-blur-md top-0 z-[100] border-b border-gray-100 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="../../index.html" class="flex items-center group">
+                        <img class="h-12 w-auto transition-transform group-hover:scale-105"
+                            src="../../assets/img/logo.png" alt="Gazela Logo">
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex lg:items-center lg:space-x-1">
+                    <a href="../../index.html"
+                        class="text-gray-700 hover:text-primary px-4 py-2 text-sm font-semibold transition-colors rounded-full hover:bg-bg-light">Accueil</a>
+
+                    <!-- À Propos Dropdown -->
+                    <div class="relative group">
+                        <button
+                            class="flex items-center text-gray-700 group-hover:text-primary px-4 py-2 text-sm font-semibold transition-colors rounded-full hover:bg-bg-light focus:outline-none">
+                            <span>À Propos</span>
+                            <svg class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div
+                            class="absolute left-0 mt-0 w-60 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-200 z-50">
+                            <div
+                                class="bg-white rounded-2xl shadow-xl ring-1 ring-black ring-opacity-5 overflow-hidden mt-2 py-2 border-t-4 border-primary">
+                                <a href="../../a-propos/qui-sommes-nous/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Qui
+                                    sommes-nous</a>
+                                <a href="../../a-propos/valeurs-missions/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Mission
+                                    & Valeurs</a>
+                                <a href="../../a-propos/actualites/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Actualités</a>
+                                <a href="../../a-propos/nous-contacter/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Nous
+                                    contacter</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nos Projets Dropdown -->
+                    <div class="relative group">
+                        <button
+                            class="flex items-center text-gray-700 group-hover:text-primary px-4 py-2 text-sm font-semibold transition-colors rounded-full hover:bg-bg-light focus:outline-none">
+                            <span>Nos Projets</span>
+                            <svg class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div
+                            class="absolute left-0 mt-0 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-200 z-50">
+                            <div
+                                class="bg-white rounded-2xl shadow-xl ring-1 ring-black ring-opacity-5 overflow-hidden mt-2 py-2 border-t-4 border-primary">
+                                <a href="../../nos-projets/projet-tanora-1/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Projet
+                                    Tanora 1</a>
+                                <a href="../../nos-projets/projet-tanora-2/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Projet
+                                    Tanora 2</a>
+                                <a href="../../nos-projets/formation-professionnelle/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Formation
+                                    Professionnelle</a>
+                                <a href="../../nos-projets/atelier-parents-enfant/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Atelier
+                                    Parents-Enfant</a>
+                                <a href="../../nos-projets/bibliotheque-ambulante/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Bibliothèque
+                                    Ambulante</a>
+                                <a href="../../nos-projets/bibliotheque-pour-tous/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Bibliothèque
+                                    Pour Tous</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agir avec nous Dropdown -->
+                    <div class="relative group">
+                        <button
+                            class="flex items-center text-gray-700 group-hover:text-primary px-4 py-2 text-sm font-semibold transition-colors rounded-full hover:bg-bg-light focus:outline-none">
+                            <span>Agir avec nous</span>
+                            <svg class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div
+                            class="absolute left-0 mt-0 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-200 z-50">
+                            <div
+                                class="bg-white rounded-2xl shadow-xl ring-1 ring-black ring-opacity-5 overflow-hidden mt-2 py-2 border-t-4 border-primary">
+                                <a href="../../agir-avec-nous/annonces/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Annonces</a>
+                                <a href="../../agir-avec-nous/devenir-partenaire/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Devenir
+                                    Partenaire</a>
+                                <a href="../../agir-avec-nous/devenir-membre/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Devenir
+                                    Membre</a>
+                                <a href="../../agir-avec-nous/devenir-benevole/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Devenir
+                                    Bénévole</a>
+                                <a href="../../agir-avec-nous/devenir-volontaire/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Devenir
+                                    Volontaire</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Témoignages Dropdown -->
+                    <div class="relative group">
+                        <button
+                            class="flex items-center text-gray-700 group-hover:text-primary px-4 py-2 text-sm font-semibold transition-colors rounded-full hover:bg-bg-light focus:outline-none">
+                            <span>Témoignages</span>
+                            <svg class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div
+                            class="absolute left-0 mt-0 w-60 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-200 z-50">
+                            <div
+                                class="bg-white rounded-2xl shadow-xl ring-1 ring-black ring-opacity-5 overflow-hidden mt-2 py-2 border-t-4 border-primary">
+                                <a href="../../temoignage/success-stories/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Success
+                                    Stories</a>
+                                <a href="../../temoignage/rapport-activites/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Rapport
+                                    d'activités</a>
+                                <a href="../../temoignage/rapport-financier/"
+                                    class="block px-5 py-3 text-sm text-gray-700 hover:bg-bg-light hover:text-primary transition-colors">Rapport
+                                    financier</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://www.leetchi.com/fr/c/cagnotte-gazela-1494193" target="_blank"
+                        class="ml-6 px-8 py-3 bg-primary text-white rounded-full font-bold shadow-lg hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-xl transition-all">
+                        Faire un don
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <input type="checkbox" id="mobile-menu-toggle" class="hidden peer">
+                    <label for="mobile-menu-toggle"
+                        class="p-2 rounded-xl bg-bg-light text-primary cursor-pointer hover:bg-accent transition-colors z-[110]">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </label>
+
+                    <!-- Mobile Sidebar Overlay -->
+                    <div class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 invisible peer-checked:opacity-100 peer-checked:visible transition-all duration-300 z-[105]"
+                        onclick="document.getElementById('mobile-menu-toggle').checked = false"></div>
+
+                    <!-- Mobile Sidebar Panel -->
+                    <div
+                        class="fixed top-0 left-0 w-[280px] h-screen bg-white shadow-2xl transition-transform duration-300 -translate-x-full peer-checked:translate-x-0 z-[108] flex flex-col pt-24 overflow-y-auto">
+                        <div class="flex flex-col px-4 gap-2">
+                            <a href="../../index.html"
+                                class="flex-grow py-4 px-6 text-lg font-bold text-gray-900 border-b border-gray-50 flex justify-between items-center group">
+                                <span>Accueil</span>
+                                <i
+                                    class="fas fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            </a>
+
+                            <!-- Mobile Dropdown: À Propos -->
+                            <div class="mobile-dropdown-group">
+                                <input type="checkbox" id="mobile-dropdown-1" class="hidden peer">
+                                <label for="mobile-dropdown-1"
+                                    class="flex items-center justify-between py-4 px-6 text-lg font-bold text-gray-900 border-b border-gray-50 cursor-pointer">
+                                    <span>À Propos</span>
+                                    <svg class="h-5 w-5 transition-transform peer-checked:rotate-180" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </label>
+                                <div
+                                    class="hidden peer-checked:block bg-bg-light/50 border-l-4 border-primary ml-4 transition-all">
+                                    <a href="../../a-propos/qui-sommes-nous/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Qui
+                                        sommes-nous</a>
+                                    <a href="../../a-propos/valeurs-missions/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Mission
+                                        & Valeurs</a>
+                                    <a href="../../a-propos/actualites/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Actualités</a>
+                                    <a href="../../a-propos/nous-contacter/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Nous
+                                        contacter</a>
+                                </div>
+                            </div>
+
+                            <!-- Mobile Dropdown: Nos Projets -->
+                            <div class="mobile-dropdown-group">
+                                <input type="checkbox" id="mobile-dropdown-2" class="hidden peer">
+                                <label for="mobile-dropdown-2"
+                                    class="flex items-center justify-between py-4 px-6 text-lg font-bold text-gray-900 border-b border-gray-50 cursor-pointer">
+                                    <span>Nos Projets</span>
+                                    <svg class="h-5 w-5 transition-transform peer-checked:rotate-180" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </label>
+                                <div
+                                    class="hidden peer-checked:block bg-bg-light/50 border-l-4 border-primary ml-4 transition-all">
+                                    <a href="../../nos-projets/projet-tanora-1/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Projet
+                                        Tanora 1</a>
+                                    <a href="../../nos-projets/projet-tanora-2/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Projet
+                                        Tanora 2</a>
+                                    <a href="../../nos-projets/formation-professionnelle/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Formation
+                                        Professionnelle</a>
+                                    <a href="../../nos-projets/atelier-parents-enfant/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Atelier
+                                        Parents-Enfant</a>
+                                    <a href="../../nos-projets/bibliotheque-ambulante/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Bibliothèque
+                                        Ambulante</a>
+                                    <a href="../../nos-projets/bibliotheque-pour-tous/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Bibliothèque
+                                        Pour Tous</a>
+                                </div>
+                            </div>
+
+                            <!-- Mobile Dropdown: Agir avec nous -->
+                            <div class="mobile-dropdown-group">
+                                <input type="checkbox" id="mobile-dropdown-3" class="hidden peer">
+                                <label for="mobile-dropdown-3"
+                                    class="flex items-center justify-between py-4 px-6 text-lg font-bold text-gray-900 border-b border-gray-50 cursor-pointer">
+                                    <span>Agir avec nous</span>
+                                    <svg class="h-5 w-5 transition-transform peer-checked:rotate-180" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </label>
+                                <div
+                                    class="hidden peer-checked:block bg-bg-light/50 border-l-4 border-primary ml-4 transition-all">
+                                    <a href="../../agir-avec-nous/annonces/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Annonces</a>
+                                    <a href="../../agir-avec-nous/devenir-partenaire/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Devenir
+                                        Partenaire</a>
+                                    <a href="../../agir-avec-nous/devenir-membre/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Devenir
+                                        Membre</a>
+                                    <a href="../../agir-avec-nous/devenir-benevole/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Devenir
+                                        Bénévole</a>
+                                    <a href="../../agir-avec-nous/devenir-volontaire/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Devenir
+                                        Volontaire</a>
+                                </div>
+                            </div>
+
+                            <!-- Mobile Dropdown: Témoignages -->
+                            <div class="mobile-dropdown-group">
+                                <input type="checkbox" id="mobile-dropdown-4" class="hidden peer">
+                                <label for="mobile-dropdown-4"
+                                    class="flex items-center justify-between py-4 px-6 text-lg font-bold text-gray-900 border-b border-gray-50 cursor-pointer">
+                                    <span>Témoignages</span>
+                                    <svg class="h-5 w-5 transition-transform peer-checked:rotate-180" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </label>
+                                <div
+                                    class="hidden peer-checked:block bg-bg-light/50 border-l-4 border-primary ml-4 transition-all">
+                                    <a href="../../temoignage/success-stories/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Success
+                                        Stories</a>
+                                    <a href="../../temoignage/rapport-activites/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Rapport
+                                        d'activités</a>
+                                    <a href="../../temoignage/rapport-financier/"
+                                        class="block py-3 px-6 text-base font-medium text-gray-700 hover:text-primary">Rapport
+                                        financier</a>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 px-6">
+                                <a href="https://www.leetchi.com/fr/c/cagnotte-gazela-1494193" target="_blank"
+                                    class="block w-full text-center py-4 bg-primary text-white font-bold rounded-2xl shadow-lg ring-4 ring-primary/20">
+                                    Faire un don
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
-
-    <header class="hero"
-        style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../assets/img/mission_bg.png'); background-size: cover; background-position: center; height: 50vh;">
-        <div class="hero-content animate">
-            <h1>Rapport <span>Financier</span></h1>
-            <p>Transparence et gestion rigoureuse de vos dons</p>
+    <section
+        class="relative flex items-center justify-center text-center text-white min-h-[50vh] bg-cover bg-center overflow-hidden"
+        style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../assets/img/gazela_hero_madagascar.png');">
+        <div class="relative z-10 max-w-4xl mx-auto px-5">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">Rapport <span
+                    class="text-primary-light border-b-8 border-primary-light/30">Financier</span></h1>
+            <p class="text-xl md:text-2xl opacity-90 font-medium max-w-2xl mx-auto leading-relaxed">Transparence et
+                gestion rigoureuse de vos dons.</p>
         </div>
-    </header>
+    </section>
 
-    <div class="container" style="padding: 80px 15px;">
+    <main class="max-w-7xl mx-auto px-5 py-20 lg:py-24 space-y-24">
 
         <!-- MODULE: SUMMARY REPORT -->
-        <section class="report-section mb-large">
-            <div class="text-center mb-medium">
-                <span class="section-subtitle">Financement & Transparence</span>
-                <h2 class="section-title">Bilan 2021 - 2026</h2>
-                <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted);">
-                    Grâce au soutien de nos partenaires majeurs, nous avons pu sécuriser les financements nécessaires
-                    pour nos projets structurants TANORA.
+        <section class="animate">
+            <div class="text-center mb-16">
+                <span class="text-primary text-sm font-bold uppercase tracking-[3px] mb-3 block">Financement &
+                    Transparence</span>
+                <h2 class="text-primary-dark text-3xl md:text-5xl font-bold mb-6">Bilan 2021 - 2026</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-500 leading-relaxed italic">
+                    "Grâce au soutien de nos partenaires majeurs, nous avons pu sécuriser les financements nécessaires
+                    pour nos projets structurants TANORA."
                 </p>
             </div>
 
-            <div class="grid-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <!-- Project Module 1 -->
-                <div class="module-card" style="background: white; border-top: 5px solid var(--accent);">
-                    <div class="card-body text-center">
-                        <span class="tag">PROJET TANORA 1</span>
-                        <h3 style="margin-top: 15px; margin-bottom: 5px;">Financement Acquis</h3>
+                <div
+                    class="bg-white rounded-[2rem] shadow-2xl shadow-gray-200/50 border-t-8 border-accent p-8 md:p-12 text-center transition-all duration-300 hover:-translate-y-2">
+                    <span
+                        class="inline-block bg-accent/10 text-accent px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest mb-6 border border-accent/20">PROJET
+                        TANORA 1</span>
+                    <h3 class="text-2xl font-bold text-gray-700 mb-8">Financement Acquis</h3>
 
-                        <div style="font-size: 3rem; font-weight: 800; color: var(--text-dark); margin: 20px 0;">
-                            25 560 <span style="font-size: 0.5em; color: var(--text-muted);">€</span>
-                        </div>
-
-                        <ul class="check-list" style="text-align: left; margin-top: 30px;">
-                            <li>Fonds alloués à l'insertion professionnelle.</li>
-                            <li>Formation et équipements.</li>
-                        </ul>
+                    <div class="text-6xl md:text-7xl font-black text-primary-dark mb-10 tracking-tighter">
+                        25 560 <span class="text-3xl text-gray-400 font-bold -ml-2">€</span>
                     </div>
+
+                    <ul class="space-y-4 text-left border-t border-gray-100 pt-8">
+                        <li class="flex items-start gap-4">
+                            <span
+                                class="w-6 h-6 rounded-full bg-accent/10 text-accent flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-check text-xs"></i>
+                            </span>
+                            <span class="text-gray-600 font-medium italic">Fonds alloués à l'insertion
+                                professionnelle.</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span
+                                class="w-6 h-6 rounded-full bg-accent/10 text-accent flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-check text-xs"></i>
+                            </span>
+                            <span class="text-gray-600 font-medium italic">Formation et équipements.</span>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- Project Module 2 -->
-                <div class="module-card" style="background: white; border-top: 5px solid var(--primary);">
-                    <div class="card-body text-center">
-                        <span class="tag" style="background: var(--primary);">PROJET TANORA 2</span>
-                        <h3 style="margin-top: 15px; margin-bottom: 5px;">Financement Acquis</h3>
+                <div
+                    class="bg-white rounded-[2rem] shadow-2xl shadow-gray-200/50 border-t-8 border-primary p-8 md:p-12 text-center transition-all duration-300 hover:-translate-y-2">
+                    <span
+                        class="inline-block bg-primary/10 text-primary px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest mb-6 border border-primary/20">PROJET
+                        TANORA 2</span>
+                    <h3 class="text-2xl font-bold text-gray-700 mb-8">Financement Acquis</h3>
 
-                        <div style="font-size: 3rem; font-weight: 800; color: var(--text-dark); margin: 20px 0;">
-                            65 319 <span style="font-size: 0.5em; color: var(--text-muted);">€</span>
-                        </div>
-
-                        <ul class="check-list" style="text-align: left; margin-top: 30px;">
-                            <li>Expansion des activités (Vagues 2 & 3).</li>
-                            <li>Pérennisation des structures d'accueil.</li>
-                        </ul>
+                    <div class="text-6xl md:text-7xl font-black text-primary-dark mb-10 tracking-tighter">
+                        65 319 <span class="text-3xl text-gray-400 font-bold -ml-2">€</span>
                     </div>
+
+                    <ul class="space-y-4 text-left border-t border-gray-100 pt-8">
+                        <li class="flex items-start gap-4">
+                            <span
+                                class="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-check text-xs"></i>
+                            </span>
+                            <span class="text-gray-600 font-medium italic text-justify">Expansion des activités (Vagues
+                                2 & 3).</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span
+                                class="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-check text-xs"></i>
+                            </span>
+                            <span class="text-gray-600 font-medium italic text-justify">Pérennisation des structures
+                                d'accueil.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <!-- MODULE: HISTORICAL DATA -->
-        <section class="activity-block">
-            <div class="activity-header-row">
-                <div>
-                    <span class="tag" style="background: var(--text-dark);">Archive</span>
-                    <h3 class="block-title">Historique 2016 - 2020</h3>
+        <section class="bg-white p-6 md:p-12 rounded-[2rem] shadow-2xl shadow-gray-200/50 border border-gray-50">
+            <div
+                class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16 border-b-2 border-gray-100 pb-8">
+                <div class="space-y-4">
+                    <span
+                        class="inline-block bg-gray-800 text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Archive</span>
+                    <h3 class="text-3xl font-extrabold text-primary-dark">Historique 2016 - 2020</h3>
                 </div>
-                <div class="block-summary">
-                    <p>Fonds propres et solidarité locale avant les subventions internationales.</p>
+                <div class="lg:text-right max-w-md">
+                    <p class="text-lg text-gray-500 italic leading-relaxed">"Fonds propres et solidarité locale avant
+                        les subventions internationales."</p>
                 </div>
             </div>
 
-            <div class="grid-2">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <!-- Key Stat -->
-                <div style="display: flex; flex-direction: column; justify-content: center;">
-                    <p style="font-size: 1.1rem; margin-bottom: 30px;">
-                        Avant les grands financements, Gazela a fonctionné grâce à la solidarité locale et l'engagement
-                        de ses membres.
+                <div class="space-y-8">
+                    <p class="text-xl text-gray-600 leading-relaxed text-justify italic">
+                        "Avant les grands financements, Gazela a fonctionné grâce à la solidarité locale et l'engagement
+                        de ses membres."
                     </p>
-                    <div class="module-card"
-                        style="padding: 30px; border-left: 5px solid var(--primary); background: var(--bg-light);">
-                        <span
-                            style="text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; color: var(--text-muted);">Total
-                            Fonds Levés</span>
-                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-top: 10px;">
-                            29 300 000 <span style="font-size: 0.4em; color: var(--text-dark);">MGA</span>
+                    <div
+                        class="bg-bg-light p-8 rounded-2xl border-l-[6px] border-primary group hover:shadow-lg transition-all duration-300">
+                        <span class="block uppercase font-bold text-xs tracking-widest text-gray-400 mb-2">Total Fonds
+                            Levés</span>
+                        <div class="text-4xl md:text-5xl font-black text-primary flex items-baseline gap-2">
+                            29 300 000 <span class="text-xl text-primary-dark font-bold uppercase">mga</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Source List -->
-                <div>
-                    <h4 style="margin-bottom: 20px;">Sources de Financement</h4>
-                    <ul class="info-list">
-                        <li>
-                            <span><i class="fas fa-hands-helping" style="color: var(--accent); margin-right: 10px;"></i>
-                                Apports bénéficiaires</span>
-                            <i class="fas fa-check-circle" style="color: var(--primary);"></i>
+                <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100">
+                    <h4 class="text-2xl font-bold text-primary-dark mb-8">Sources de Financement</h4>
+                    <ul class="space-y-4">
+                        <li
+                            class="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm group hover:border-primary border border-transparent transition-all">
+                            <span class="flex items-center gap-4 text-gray-700 font-semibold group-hover:text-primary">
+                                <i class="fas fa-hands-helping text-accent"></i>
+                                Apports bénéficiaires
+                            </span>
+                            <i class="fas fa-check-circle text-primary opacity-50"></i>
                         </li>
-                        <li>
-                            <span><i class="fas fa-donate" style="color: var(--accent); margin-right: 10px;"></i> Dons
-                                partenaires privés</span>
-                            <i class="fas fa-check-circle" style="color: var(--primary);"></i>
+                        <li
+                            class="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm group hover:border-primary border border-transparent transition-all">
+                            <span class="flex items-center gap-4 text-gray-700 font-semibold group-hover:text-primary">
+                                <i class="fas fa-donate text-accent"></i>
+                                Dons partenaires privés
+                            </span>
+                            <i class="fas fa-check-circle text-primary opacity-50"></i>
                         </li>
-                        <li>
-                            <span><i class="fas fa-users" style="color: var(--accent); margin-right: 10px;"></i>
-                                Subventions associations</span>
-                            <i class="fas fa-check-circle" style="color: var(--primary);"></i>
+                        <li
+                            class="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm group hover:border-primary border border-transparent transition-all">
+                            <span class="flex items-center gap-4 text-gray-700 font-semibold group-hover:text-primary">
+                                <i class="fas fa-users text-accent"></i>
+                                Subventions associations
+                            </span>
+                            <i class="fas fa-check-circle text-primary opacity-50"></i>
                         </li>
-                        <li>
-                            <span><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 10px;"></i>
-                                Événements caritatifs</span>
-                            <i class="fas fa-check-circle" style="color: var(--primary);"></i>
+                        <li
+                            class="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm group hover:border-primary border border-transparent transition-all">
+                            <span class="flex items-center gap-4 text-gray-700 font-semibold group-hover:text-primary">
+                                <i class="fas fa-calendar-alt text-accent"></i>
+                                Événements caritatifs
+                            </span>
+                            <i class="fas fa-check-circle text-primary opacity-50"></i>
                         </li>
                     </ul>
                 </div>
             </div>
         </section>
 
-    </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
+    <footer class="bg-primary-dark text-white py-20">
+        <div class="max-w-[1200px] mx-auto px-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16">
                 <div>
-                    <span class="footer-logo">Gazela</span>
-                    <p class="footer-desc">Association loi 1901 œuvrant pour le développement social et l'éducation des
-                        enfants à Madagascar depuis 2011.</p>
+                    <span class="text-3xl font-extrabold block mb-5">Gazela</span>
+                    <p class="opacity-70 mb-8">Association loi 1901 œuvrant pour le développement social et l'éducation
+                        des enfants à Madagascar depuis 2011.</p>
                 </div>
                 <div>
-                    <h4 class="footer-title">Navigation</h4>
-                    <ul class="footer-links">
-                        <li><a href="">Accueil</a></li>
-                        <li><a href="a-propos/qui-sommes-nous/">À Propos</a></li>
-                        <li><a href="temoignage/success-stories/">Témoignages</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="footer-title">Agir</h4>
-                    <ul class="footer-links">
-                        <li><a href="agir-avec-nous/don/">Faire un don</a></li>
-                        <li><a href="agir-avec-nous/devenir-volontaire/">Bénévolat</a>
+                    <h4
+                        class="text-xl font-bold mb-6 relative pb-3 after:absolute after:bottom-0 after:left-0 after:w-8 after:h-0.5 after:bg-primary-light">
+                        Navigation</h4>
+                    <ul class="space-y-4">
+                        <li><a href=""
+                                class="opacity-70 hover:opacity-100 hover:text-primary-light hover:pl-1 transition-all">Accueil</a>
                         </li>
-                        <li><a href="agir-avec-nous/devenir-partenaire/">Partenaires</a>
+                        <li><a href="a-propos/qui-sommes-nous/"
+                                class="opacity-70 hover:opacity-100 hover:text-primary-light hover:pl-1 transition-all">À
+                                Propos</a></li>
+                        <li><a href="temoignage/success-stories/"
+                                class="opacity-70 hover:opacity-100 hover:text-primary-light hover:pl-1 transition-all">Témoignages</a>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="footer-title">Contact</h4>
-                    <p style="opacity: 0.7; font-size: 0.9rem;">
+                    <h4
+                        class="text-xl font-bold mb-6 relative pb-3 after:absolute after:bottom-0 after:left-0 after:w-8 after:h-0.5 after:bg-primary-light">
+                        Agir</h4>
+                    <ul class="space-y-4">
+                        <li><a href="agir-avec-nous/don/"
+                                class="opacity-70 hover:opacity-100 hover:text-primary-light hover:pl-1 transition-all">Faire
+                                un don</a></li>
+                        <li><a href="agir-avec-nous/devenir-volontaire/"
+                                class="opacity-70 hover:opacity-100 hover:text-primary-light hover:pl-1 transition-all">Bénévolat</a>
+                        </li>
+                        <li><a href="agir-avec-nous/devenir-partenaire/"
+                                class="opacity-70 hover:opacity-100 hover:text-primary-light hover:pl-1 transition-all">Partenaires</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4
+                        class="text-xl font-bold mb-6 relative pb-3 after:absolute after:bottom-0 after:left-0 after:w-8 after:h-0.5 after:bg-primary-light">
+                        Contact</h4>
+                    <p class="opacity-70 text-sm">
                         Lot IJJ 13126 A, Antanjona<br>
                         Antananarivo, Madagascar<br><br>
                         association.gazela@gmail.com
                     </p>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div class="border-t border-white/10 pt-10 text-sm opacity-60 text-center lg:text-left">
                 &copy; 2026 Association Gazela. Tous droits réservés.
             </div>
         </div>
