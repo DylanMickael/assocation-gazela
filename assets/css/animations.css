@@ -23,3 +23,15 @@
     animation-delay: 0.4s;
     opacity: 0;
 }
+
+body:has(#mobile-menu-toggle:checked) {
+    overflow: hidden;
+}
+
+#mobile-menu-toggle:checked+label .icon-menu {
+    display: none;
+}
+
+#mobile-menu-toggle:not(:checked)+label .icon-close {
+    display: none;
+}
