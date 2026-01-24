@@ -29,7 +29,7 @@ Le site est construit avec une approche **"Vanilla First"** pour garantir perfor
 ## 📂 Structure du Projet
 ```text
 /
-├── index.html                  # Page d'accueil
+├── /                  # Page d'accueil
 ├── a-propos/                   # Qui sommes-nous, Missions, Actualités
 ├── nos-projets/                # Détails des programmes (Tanora, Bibliothèque...)
 ├── agir-avec-nous/             # Recrutement bénévoles, membres, partenaires
@@ -44,7 +44,7 @@ Le site est construit avec une approche **"Vanilla First"** pour garantir perfor
 Aucune installation de dépendance n'est nécessaire. Le projet fonctionne "out-of-the-box".
 
 1. Clonez le dépôt.
-2. Ouvrez `index.html` dans n'importe quel navigateur moderne.
+2. Ouvrez `/` dans n'importe quel navigateur moderne.
 3. Pour le développement CSS, les variables sont centralisées dans `:root` au début de `style.css`.
 
 ---
