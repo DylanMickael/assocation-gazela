@@ -13,10 +13,13 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../../assets/css/animations.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/animations.css">
     <script src="../../assets/js/taiwind.config.js"></script>
     <script src="../../assets/js/head.js"></script>
+    <script src="../../api/blog.js"></script>
 </head>
 
 <body>
@@ -348,218 +351,85 @@
         </div>
     </section>
 
-    <section class="py-20 lg:py-24">
+    <section class="py-20 bg-gray-50" x-data="blogManager">
         <div class="max-w-[1200px] mx-auto px-5">
 
-
-            <!-- Search Bar -->
-            <div class="relative max-w-[600px] mx-auto mb-12">
+            <div class="relative max-w-[600px] mx-auto mb-16">
                 <i
-                    class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-primary text-xl pointer-events-none"></i>
-                <input type="text" id="blogSearch"
-                    class="w-full py-4 pr-6 pl-14 rounded-full border-2 border-black/10 text-lg transition-all bg-white shadow-lg focus:outline-none focus:border-primary focus:shadow-primary/15"
-                    placeholder="Rechercher un article, une date...">
-            </div>
-            <div id="noResults" class="hidden text-center p-10 text-xl text-gray-400">
-                <i class="fa-regular fa-face-frown mr-2"></i> Aucun article trouvé pour votre recherche.
+                    class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-primary text-xl opacity-50"></i>
+                <input type="text" x-model="search"
+                    class="w-full py-5 pr-6 pl-14 rounded-2xl border-none text-lg transition-all bg-white shadow-xl focus:ring-2 focus:ring-primary/50"
+                    placeholder="Rechercher une actualité...">
             </div>
 
-            <!-- Timeline Group: Décembre 2024 -->
-            <div class="timeline-group mb-16">
-                <h2
-                    class="relative flex items-center gap-4 mb-8 text-primary-dark text-3xl font-bold pl-5 
-                           before:content-[''] before:absolute before:left-0 before:h-full before:w-[5px] before:bg-primary before:rounded-sm 
-                           after:content-[''] after:flex-grow after:h-[1px] after:bg-gradient-to-r after:from-bg-light after:to-transparent after:ml-5">
-                    Décembre 2024
-                </h2>
-                <div
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-8 articles-grid">
+            <div x-show="loading" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <template x-for="i in 3">
+                    <div class="animate-pulse bg-white rounded-2xl p-6 h-80 shadow-sm">
+                        <div class="w-full h-40 bg-gray-200 rounded-xl mb-4"></div>
+                        <div class="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                    </div>
+                </template>
+            </div>
 
-                    <article
-                        class="blog-card group bg-white rounded-md overflow-hidden shadow-lg transition-all h-full flex flex-col border border-black/5 hover:-translate-y-1 hover:shadow-xl hover:border-black/10">
-                        <div class="relative h-[220px] overflow-hidden">
-                            <img src="../../assets/img/gazela_hero_madagascar.png" alt="Visite culturelle"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                        </div>
-                        <div class="p-8 flex-grow flex flex-col">
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex flex-wrap gap-2 card-tags">
-                                    <span
-                                        class="text-[0.7rem] font-bold uppercase py-1 px-2.5 rounded-[4px] bg-bg-light text-primary-dark tracking-wider transition-all hover:bg-primary hover:text-white">Éducation</span>
-                                    <span
-                                        class="text-[0.7rem] font-bold uppercase py-1 px-2.5 rounded-[4px] bg-bg-light text-primary-dark tracking-wider transition-all hover:bg-primary hover:text-white">Culture</span>
+            <div x-show="Object.keys(filteredGroups).length === 0 && !loading"
+                class="text-center py-20 bg-white rounded-3xl shadow-inner border-2 border-dashed border-gray-200">
+                <div class="text-6xl mb-4">🔍</div>
+                <h3 class="text-2xl font-bold text-gray-800">Aucun article trouvé</h3>
+                <p class="text-gray-500 mt-2">Essayez d'autres mots-clés ou réinitialisez votre recherche.</p>
+                <button @click="search = ''" class="mt-6 text-primary font-bold underline">Effacer la recherche</button>
+            </div>
+
+            <template x-for="(groupArticles, monthYear) in filteredGroups" :key="monthYear">
+                <div class="mb-16">
+                    <div class="flex items-center gap-4 mb-10">
+                        <h2 class="text-2xl font-bold text-gray-900 capitalize" x-text="monthYear"></h2>
+                        <div class="h-[1px] flex-grow bg-gray-200"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        <template x-for="article in groupArticles" :key="article.titre">
+                            <article
+                                class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col border border-gray-100 group"
+                                x-data="{ expanded: false }">
+
+                                <div class="relative h-56 overflow-hidden">
+                                    <img :src="article.image.url"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                                    <div class="absolute top-4 left-4">
+                                        <span
+                                            class="bg-white/90 backdrop-blur-sm text-primary text-[10px] font-black uppercase px-3 py-1 rounded-lg shadow-sm">Actu</span>
+                                    </div>
                                 </div>
-                                <span class="text-sm text-gray-500 font-semibold flex items-center gap-2 card-date">
-                                    <i class="fa-regular fa-calendar text-primary"></i> 15 Déc.
-                                </span>
-                            </div>
-                            <h3 class="mb-4 text-xl font-bold text-gray-900 group">
-                                <a href="#"
-                                    class="relative inline-block hover:text-primary-dark after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">
-                                    Visite au Centre Culturel Américain
-                                </a>
-                            </h3>
-                            <p class="text-gray-600 text-[0.95rem] mb-5 flex-grow leading-relaxed">Les jeunes de Gazela
-                                ont découvert les ressources numériques et bibliographiques du
-                                centre à Tanjombato.</p>
 
-                            <div
-                                class="more-content hidden mt-5 pt-5 border-t border-black/5 animate-[fadeIn_0.5s_ease]">
-                                <p class="mb-4 text-sm text-gray-800">Durant cette journée exceptionnelle, nos jeunes
-                                    bénéficiaires ont pu accéder à une
-                                    vaste collection de livres en anglais et en français, ainsi qu'à des ordinateurs
-                                    connectés à internet haut débit. Des ateliers d'initiation à la recherche
-                                    documentaire ont été animés par l'équipe du centre.</p>
-                                <p class="mb-4 text-sm text-gray-800">Cette initiative s'inscrit dans notre volonté
-                                    d'ouvrir les horizons culturels des
-                                    enfants et de leur donner accès à des outils pédagogiques de qualité. Les échanges
-                                    ont été fructueux et plusieurs jeunes ont manifesté l'envie de revenir pour
-                                    approfondir leurs connaissances.</p>
-                            </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <span class="text-xs font-bold text-gray-400 mb-3 flex items-center gap-2">
+                                        <i class="fa-regular fa-calendar-alt text-primary"></i>
+                                        <span x-text="formatDay(article.date)"></span>
+                                    </span>
 
-                            <div class="h-[1px] bg-bg-light -mx-8 mb-5"></div>
+                                    <h3 class="text-xl font-bold mb-3 text-gray-900 leading-tight group-hover:text-primary transition-colors"
+                                        x-text="article.titre"></h3>
 
-                            <a href="#"
-                                class="read-more-link inline-flex items-center gap-2 text-primary font-bold text-sm mt-auto uppercase tracking-widest hover:text-primary-dark">
-                                Lire la suite <i
-                                    class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
-                            </a>
-                        </div>
-                    </article>
+                                    <p class="text-gray-500 text-sm mb-6 line-clamp-3" x-text="article.description"></p>
 
-                </div>
-            </div>
+                                    <div x-show="expanded" x-collapse>
+                                        <div class="py-4 text-sm text-gray-700 border-t border-gray-50"
+                                            style="white-space: pre-line" x-text="article.lirePlus"></div>
+                                    </div>
 
-            <!-- Timeline Group: Novembre 2024 -->
-            <div class="timeline-group mb-16">
-                <h2
-                    class="relative flex items-center gap-4 mb-8 text-primary-dark text-3xl font-bold pl-5 
-                           before:content-[''] before:absolute before:left-0 before:h-full before:w-[5px] before:bg-primary before:rounded-sm 
-                           after:content-[''] after:flex-grow after:h-[1px] after:bg-gradient-to-r after:from-bg-light after:to-transparent after:ml-5">
-                    Novembre 2024
-                </h2>
-                <div
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-8 articles-grid">
-
-                    <article
-                        class="blog-card group bg-white rounded-md overflow-hidden shadow-lg transition-all h-full flex flex-col border border-black/5 hover:-translate-y-1 hover:shadow-xl hover:border-black/10">
-                        <div class="relative h-[220px] overflow-hidden">
-                            <img src="../../assets/img/gazela_mobile_library.png" alt="CRAAM"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                        </div>
-                        <div class="p-8 flex-grow flex flex-col">
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex flex-wrap gap-2 card-tags">
-                                    <span
-                                        class="text-[0.7rem] font-bold uppercase py-1 px-2.5 rounded-[4px] bg-bg-light text-primary-dark tracking-wider transition-all hover:bg-primary hover:text-white">Évènement</span>
-                                    <span
-                                        class="text-[0.7rem] font-bold uppercase py-1 px-2.5 rounded-[4px] bg-bg-light text-primary-dark tracking-wider transition-all hover:bg-primary hover:text-white">Art</span>
+                                    <button @click="expanded = !expanded"
+                                        class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between text-primary font-bold text-xs uppercase tracking-wider group/btn">
+                                        <span x-text="expanded ? 'Réduire' : 'Lire la suite'"></span>
+                                        <i class="fa-solid fa-chevron-right transition-transform duration-300"
+                                            :class="expanded ? 'rotate-90' : 'group-hover/btn:translate-x-1'"></i>
+                                    </button>
                                 </div>
-                                <span class="text-sm text-gray-500 font-semibold flex items-center gap-2 card-date">
-                                    <i class="fa-regular fa-calendar text-primary"></i> 20 Nov.
-                                </span>
-                            </div>
-                            <h3 class="mb-4 text-xl font-bold text-gray-900 group">
-                                <a href="#"
-                                    class="relative inline-block hover:text-primary-dark after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">
-                                    Gazela participe au CRAAM
-                                </a>
-                            </h3>
-                            <p class="text-gray-600 text-[0.95rem] mb-5 flex-grow leading-relaxed">Un évènement riche en
-                                échanges artistiques et culturels pour mettre en avant la
-                                créativité de nos jeunes.</p>
-
-                            <div
-                                class="more-content hidden mt-5 pt-5 border-t border-black/5 animate-[fadeIn_0.5s_ease]">
-                                <p class="mb-4 text-sm text-gray-800">Le CRAAM (Centre de Ressources des Arts Actuels de
-                                    Madagascar) à l'Université
-                                    d'Antananarivo a été le théâtre de performances artistiques vibrantes. Nos jeunes
-                                    ont participé à des ateliers de danse, de peinture et de théâtre.</p>
-                                <p class="mb-4 text-sm text-gray-800">L'art est un vecteur puissant d'expression et de
-                                    confiance en soi. Voir nos enfants
-                                    s'épanouir sur scène et partager leurs émotions avec le public a été un moment de
-                                    grande fierté pour toute l'équipe de Gazela. Cet évènement renforce nos liens avec
-                                    les acteurs culturels locaux.</p>
-                            </div>
-
-                            <div class="h-[1px] bg-bg-light -mx-8 mb-5"></div>
-
-                            <a href="#"
-                                class="read-more-link inline-flex items-center gap-2 text-primary font-bold text-sm mt-auto uppercase tracking-widest hover:text-primary-dark">
-                                Lire la suite <i
-                                    class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
-                            </a>
-                        </div>
-                    </article>
-
+                            </article>
+                        </template>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Timeline Group: Octobre 2024 -->
-            <div class="timeline-group mb-16">
-                <h2
-                    class="relative flex items-center gap-4 mb-8 text-primary-dark text-3xl font-bold pl-5 
-                           before:content-[''] before:absolute before:left-0 before:h-full before:w-[5px] before:bg-primary before:rounded-sm 
-                           after:content-[''] after:flex-grow after:h-[1px] after:bg-gradient-to-r after:from-bg-light after:to-transparent after:ml-5">
-                    Octobre 2024
-                </h2>
-                <div
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-8 articles-grid">
-
-                    <article
-                        class="blog-card group bg-white rounded-md overflow-hidden shadow-lg transition-all h-full flex flex-col border border-black/5 hover:-translate-y-1 hover:shadow-xl hover:border-black/10">
-                        <div class="relative h-[220px] overflow-hidden">
-                            <img src="../../assets/img/gazela_sewing_workshop.png" alt="Astcomweb"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                        </div>
-                        <div class="p-8 flex-grow flex flex-col">
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex flex-wrap gap-2 card-tags">
-                                    <span
-                                        class="text-[0.7rem] font-bold uppercase py-1 px-2.5 rounded-[4px] bg-bg-light text-primary-dark tracking-wider transition-all hover:bg-primary hover:text-white">Formation</span>
-                                    <span
-                                        class="text-[0.7rem] font-bold uppercase py-1 px-2.5 rounded-[4px] bg-bg-light text-primary-dark tracking-wider transition-all hover:bg-primary hover:text-white">Numérique</span>
-                                </div>
-                                <span class="text-sm text-gray-500 font-semibold flex items-center gap-2 card-date">
-                                    <i class="fa-regular fa-calendar text-primary"></i> 12 Oct.
-                                </span>
-                            </div>
-                            <h3 class="mb-4 text-xl font-bold text-gray-900 group">
-                                <a href="#"
-                                    class="relative inline-block hover:text-primary-dark after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">
-                                    Visite Pédagogique chez Astcomweb
-                                </a>
-                            </h3>
-                            <p class="text-gray-600 text-[0.95rem] mb-5 flex-grow leading-relaxed">Découverte du monde
-                                de l'entreprise et des métiers du numérique pour nos promotions en
-                                formation.</p>
-
-                            <div
-                                class="more-content hidden mt-5 pt-5 border-t border-black/5 animate-[fadeIn_0.5s_ease]">
-                                <p class="mb-4 text-sm text-gray-800">Merci à l'équipe d'Astcomweb pour son accueil
-                                    chaleureux. Cette immersion en
-                                    entreprise est cruciale pour nos étudiants en formation professionnelle. Ils ont pu
-                                    voir concrètement comment se déroule un projet web, de la conception à la mise en
-                                    ligne.</p>
-                                <p class="mb-4 text-sm text-gray-800">Ces visites permettent de réduire le fossé entre
-                                    la formation théorique et la réalité
-                                    du marché du travail. Plusieurs professionnels ont pris le temps d'expliquer leur
-                                    parcours, inspirant ainsi nos jeunes à persévérer dans leurs études numériques.</p>
-                            </div>
-
-                            <div class="h-[1px] bg-bg-light -mx-8 mb-5"></div>
-
-                            <a href="#"
-                                class="read-more-link inline-flex items-center gap-2 text-primary font-bold text-sm mt-auto uppercase tracking-widest hover:text-primary-dark">
-                                Lire la suite <i
-                                    class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
-                            </a>
-                        </div>
-                    </article>
-
-                </div>
-            </div>
-
+            </template>
         </div>
     </section>
 
