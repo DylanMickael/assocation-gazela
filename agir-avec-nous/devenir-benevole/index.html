@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/animations.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../assets/js/taiwind.config.js"></script>
     <script src="../../assets/js/head.js"></script>
@@ -416,48 +418,86 @@
     </section>
 
     <!-- 3. Guide (Image Left) -->
-    <section class="py-20 lg:py-24 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-5">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                <div class="relative group">
+    <section class="py-12 md:py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center" x-data="{ 
+                activeStep: 1, 
+                totalSteps: 3,
+                next() { this.activeStep = this.activeStep === this.totalSteps ? 1 : this.activeStep + 1 },
+                prev() { this.activeStep = this.activeStep === 1 ? this.totalSteps : this.activeStep - 1 }
+             }">
+
+                <div class="relative group order-2 lg:order-1">
                     <div
                         class="absolute -inset-4 bg-primary/5 rounded-[2rem] blur-2xl group-hover:bg-primary/10 transition-colors">
                     </div>
                     <img src="../../assets/img/biblio_ambulante.png" alt="Guide Bénévole"
-                        class="relative rounded-2xl shadow-2xl w-full object-cover aspect-[4/3]">
+                        class="relative rounded-3xl shadow-2xl w-full object-cover aspect-[4/3] md:aspect-video lg:aspect-[4/3]">
                 </div>
-                <div class="flex flex-col gap-8">
-                    <h3 class="text-primary-dark text-3xl md:text-4xl font-bold leading-tight">Guide pour devenir
-                        bénévole</h3>
 
-                    <div class="text-slider-container relative min-h-[150px]">
-                        <!-- Note: 'active' class used for JS control -->
-                        <div class="text-slide active transition-all duration-500">
-                            <h4 class="text-2xl font-bold text-primary mb-3">1. Contact</h4>
-                            <p class="text-lg text-gray-500 leading-relaxed">Il suffit de nous contacter via le
-                                formulaire ci-dessous.</p>
+                <div class="flex flex-col gap-6 md:gap-8 order-1 lg:order-2">
+                    <div class="space-y-2">
+                        <span class="text-primary font-bold tracking-widest text-sm uppercase">Processus</span>
+                        <h3 class="text-primary-dark text-3xl md:text-4xl font-bold leading-tight">
+                            Guide pour devenir bénévole
+                        </h3>
+                    </div>
+
+                    <div class="relative min-h-[160px] md:min-h-[140px]">
+                        <div x-show="activeStep === 1" x-transition:enter="transition ease-out duration-500"
+                            x-transition:enter-start="opacity-0 translate-x-4"
+                            x-transition:enter-end="opacity-100 translate-x-0" class="space-y-3">
+                            <h4 class="text-2xl font-bold text-primary flex items-center gap-3">
+                                <span
+                                    class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-sm">1</span>
+                                Contact
+                            </h4>
+                            <p class="text-lg text-gray-500 leading-relaxed">
+                                Il suffit de nous contacter via le formulaire ci-dessous. Nous traitons les demandes
+                                sous 48h.
+                            </p>
                         </div>
-                        <div class="text-slide hidden transition-all duration-500">
-                            <h4 class="text-2xl font-bold text-primary mb-3">2. Échange</h4>
-                            <p class="text-lg text-gray-500 leading-relaxed">Nous discuterons ensemble de ce que vous
-                                aimeriez faire.</p>
+
+                        <div x-show="activeStep === 2" x-transition:enter="transition ease-out duration-500"
+                            x-transition:enter-start="opacity-0 translate-x-4"
+                            x-transition:enter-end="opacity-100 translate-x-0" class="space-y-3">
+                            <h4 class="text-2xl font-bold text-primary flex items-center gap-3">
+                                <span
+                                    class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-sm">2</span>
+                                Échange
+                            </h4>
+                            <p class="text-lg text-gray-500 leading-relaxed">
+                                Nous discuterons ensemble de vos motivations, de vos compétences et de ce que vous
+                                aimeriez apporter.
+                            </p>
                         </div>
-                        <div class="text-slide hidden transition-all duration-500">
-                            <h4 class="text-2xl font-bold text-primary mb-3">3. Action</h4>
-                            <p class="text-lg text-gray-500 leading-relaxed">Nous définissons ensemble la manière dont
-                                vous pouvez aider l'équipe.</p>
+
+                        <div x-show="activeStep === 3" x-transition:enter="transition ease-out duration-500"
+                            x-transition:enter-start="opacity-0 translate-x-4"
+                            x-transition:enter-end="opacity-100 translate-x-0" class="space-y-3">
+                            <h4 class="text-2xl font-bold text-primary flex items-center gap-3">
+                                <span
+                                    class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-sm">3</span>
+                                Action
+                            </h4>
+                            <p class="text-lg text-gray-500 leading-relaxed">
+                                Nous définissons ensemble la manière dont vous pouvez aider l'équipe sur le terrain ou à
+                                distance.
+                            </p>
                         </div>
                     </div>
 
-                    <div class="flex gap-4 ts-controls">
-                        <button
-                            class="ts-arrow prev w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center text-primary bg-white shadow-sm hover:bg-primary hover:text-white transition-all">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button
-                            class="ts-arrow next w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center text-primary bg-white shadow-sm hover:bg-primary hover:text-white transition-all">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
+                    <div class="flex items-center gap-6">
+                        <div class="flex gap-3">
+                            <button @click="prev()"
+                                class="w-12 h-12 rounded-full border-2 border-primary/10 flex items-center justify-center text-primary bg-white shadow-sm hover:bg-primary hover:text-white transition-all active:scale-90">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                            <button @click="next()"
+                                class="w-12 h-12 rounded-full border-2 border-primary/10 flex items-center justify-center text-primary bg-white shadow-sm hover:bg-primary hover:text-white transition-all active:scale-90">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

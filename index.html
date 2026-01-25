@@ -338,23 +338,40 @@
 
 
     <!-- Hero Section -->
-    <section class="h-[90vh] bg-cover bg-center bg-no-repeat flex items-center justify-center text-center text-white"
-        style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./assets/img/gazela_hero_madagascar.png')">
-        <div class="max-w-4xl px-5 animate">
-            <div class="max-w-4xl animate px-5 mb-12">
-                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">C'est <span
-                        class="text-primary-light border-b-8 border-primary-light/30">ensemble</span> que nous faisons
-                    bouger les choses</h1>
-                <p class="text-xl md:text-2xl opacity-90 font-medium">L'association Gazela œuvre pour la promotion et le
-                    développement de l'environnement social des enfants et des jeunes à Madagascar.</p>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-5 justify-center mb-12">
-                <a href="#projets"
-                    class="px-8 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg transition-all">Découvrir
-                    nos projets</a>
-                <a href="agir-avec-nous/devenir-volontaire/"
-                    class="px-8 py-3 bg-transparent border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-primary transition-all">Devenir
-                    Volontaire</a>
+    <section class="relative min-h-[80vh] lg:h-[90vh] w-full flex items-center justify-center overflow-hidden" x-data>
+        <div class="absolute inset-0 z-0">
+            <img src="./assets/img/gazela_hero_madagascar.png" alt="Gazela Madagascar"
+                class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/60 lg:bg-black/50"></div>
+        </div>
+
+        <div class="relative z-10 w-full max-w-[1200px] mx-auto px-6 py-20 lg:py-0">
+            <div class="max-w-4xl mx-auto text-center">
+
+                <h1
+                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.1]">
+                    C'est <span
+                        class="text-primary-light inline-block border-b-4 md:border-b-8 border-primary-light/30">ensemble</span>
+                    que nous faisons bouger les choses
+                </h1>
+
+                <p
+                    class="text-lg sm:text-xl md:text-2xl text-white/90 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
+                    L'association Gazela œuvre pour la promotion et le développement de l'environnement social des
+                    enfants et des jeunes à Madagascar.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                    <a href="#projets"
+                        class="w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-full font-bold text-lg hover:bg-primary-dark hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
+                        Découvrir nos projets
+                    </a>
+                    <a href="agir-avec-nous/devenir-volontaire/"
+                        class="w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-primary transition-all duration-300">
+                        Devenir Volontaire
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>

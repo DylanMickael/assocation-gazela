@@ -351,6 +351,7 @@
         </div>
     </section>
 
+    <!-- Blog Section -->
     <section class="py-20 bg-gray-50" x-data="blogManager">
         <div class="max-w-[1200px] mx-auto px-5">
 
@@ -429,6 +430,18 @@
                         </template>
                     </div>
                 </div>
+            </template>
+        </div>
+        <div x-intersect="loadMore()" class="py-10 flex justify-center">
+            <template x-if="loadingMore">
+                <div class="flex flex-col items-center gap-3">
+                    <div class="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                    <p class="text-xs font-bold text-primary uppercase tracking-widest">Chargement des articles...</p>
+                </div>
+            </template>
+
+            <template x-if="!hasMore && articles.length > 0">
+                <p class="text-gray-400 text-sm italic">Vous avez parcouru toutes les actualités.</p>
             </template>
         </div>
     </section>
