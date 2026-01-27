@@ -40,3 +40,12 @@ body:has(#mobile-menu-toggle:checked) {
 #mobile-menu-toggle:not(:checked)+label .icon-close {
     display: none;
 }
+
+section {
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+section.show {
+    opacity: 1;
+}

@@ -6,6 +6,15 @@
 L'**Association Gazela** est une organisation loi 1901 œuvrant pour le développement social et l'éducation des enfants à Madagascar depuis 2011. Ce projet web est la vitrine officielle de l'association, conçue pour présenter ses actions, engager des bénévoles et faciliter les dons.
 
 ## 🚀 Fonctionnalités Clés
+Actualités & Blog : Timeline dynamique groupée par date et système de tags.
+Expérience Utilisateur : Design Premium (Outfit font, vert terreux), sliders interactifs et navigation mega-dropdown.
+Performance : Approche "Vanilla First" sans frameworks lourds.
+
+## 🛠 Stack Technique & Outils
+Communication : EmailJS (Gestion des envois d'emails côté client).
+Média : Cloudinary (Hébergement et optimisation des documents/images).
+Contenu (CMS) : Hygraph (Headless CMS via GraphQL pour les articles et projets).
+Design & Layout : Pinegrow Web Editor (Prototypage visuel et gestion du CSS).
 
 ### 📰 Actualités & Blog
 - **Timeline Dynamique** : Les articles sont automatiquement groupés par mois et année pour une lecture chronologique claire.

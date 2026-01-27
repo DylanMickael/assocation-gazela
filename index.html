@@ -447,51 +447,140 @@
                     <p class="font-semibold text-gray-700">Jeunes accompagnés</p>
                 </div>
             </div>
+
+            <div class="relative mt-12 group">
+                <div
+                    class="absolute inset-0 bg-[#d3dfc7] translate-x-4 translate-y-4 md:translate-x-8 md:translate-y-8 rounded-[2rem] md:rounded-[3rem] transition-transform group-hover:translate-x-6 group-hover:translate-y-6">
+                </div>
+
+                <div class="relative overflow-hidden rounded-[2rem] md:rounded-[3rem] shadow-2xl mt-12">
+                    <img src="./assets/img/testimonial_1.png" alt="Bibliothèque Gazela"
+                        class="w-full h-[400px] md:h-[600px] object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Projects Grid -->
-    <section id="projets" class="bg-bg-light py-20">
-        <div class="max-w-[1200px] mx-auto px-5">
-            <div class="text-center mb-16">
-                <span class="text-primary text-xs font-bold uppercase tracking-widest mb-3 block">NOS ACTIONS</span>
-                <h2 class="text-4xl md:text-5xl font-bold text-primary-dark">Nos projets phares</h2>
+    <section id="projets" class="bg-[#f8faf9] py-24 overflow-hidden">
+        <div class="max-w-[1100px] mx-auto px-6">
+
+            <div class="text-center mb-24">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-primary/5 border border-primary/10">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    <span class="text-[10px] font-black tracking-[0.2em] uppercase text-primary">Impact Durable</span>
+                </div>
+                <h2 class="text-5xl md:text-6xl font-black text-slate-900 tracking-tight">Nos projets <span
+                        class="text-primary">phares</span>.</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <a href="nos-projets/bibliotheque-ambulante/"
-                    class="group relative rounded-3xl overflow-hidden h-96 animate">
-                    <img src="./assets/img/gazela_mobile_library.png" alt="Bibliothèque Ambulante"
-                        class="w-full h-full object-cover">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/85 to-transparent flex flex-col justify-end p-8 translate-y-5 group-hover:translate-y-0 transition-transform">
-                        <span class="text-xs uppercase font-bold text-white mb-2">BMV</span>
-                        <h3 class="text-white text-2xl font-bold mb-2">Bibliothèque Ambulante</h3>
-                        <p class="text-white/90">Visite des fokontany pour sensibiliser à la lecture.</p>
+            <div class="relative space-y-24 lg:space-y-0">
+                <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-dashed-gradient hidden lg:block opacity-20"
+                    style="background-image: linear-gradient(to bottom, transparent 0%, #1a4331 50%, transparent 100%); background-size: 2px 20px;">
+                </div>
+
+                <div class="group relative flex flex-col lg:flex-row items-center justify-start lg:min-h-[400px]">
+                    <div class="w-full lg:w-1/2 lg:pr-20" data-aos="fade-right">
+                        <a href="nos-projets/projet-tanora-1/"
+                            class="block relative p-12 bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.02)] border border-slate-100 transition-all duration-500 hover:shadow-[0_40px_80px_rgba(26,67,49,0.08)] hover:-translate-y-3">
+                            <div
+                                class="absolute -top-6 -right-6 w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center text-primary/20 text-4xl font-black select-none">
+                                01</div>
+                            <div class="flex items-center gap-3 mb-8">
+                                <span
+                                    class="px-3 py-1 rounded-md bg-primary text-white text-[10px] font-bold">PTII</span>
+                                <span class="h-px w-8 bg-slate-200"></span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-slate-900 mb-5 leading-tight">Projet Tanora II
+                            </h3>
+                            <p class="text-slate-500 leading-relaxed mb-10 text-lg">Porter le savoir au cœur des
+                                fokontany pour éveiller la curiosité des plus jeunes.</p>
+                            <div class="inline-flex items-center gap-4 text-primary font-bold group/link">
+                                <span
+                                    class="text-sm tracking-tighter uppercase border-b-2 border-transparent group-hover/link:border-primary transition-all">Découvrir
+                                    l'action</span>
+                                <svg class="w-6 h-6 transition-transform group-hover/link:translate-x-2" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </div>
+                        </a>
                     </div>
-                </a>
-                <a href="nos-projets/formation-professionnelle/"
-                    class="group relative rounded-3xl overflow-hidden h-96 animate animate-delay-2">
-                    <img src="./assets/img/gazela_mobile_library.png" alt="Formation Professionnelle"
-                        class="w-full h-full object-cover">
                     <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/85 to-transparent flex flex-col justify-end p-8 translate-y-5 group-hover:translate-y-0 transition-transform">
-                        <span class="text-xs uppercase font-bold text-white mb-2">PFP/FP</span>
-                        <h3 class="text-white text-2xl font-bold mb-2">Formation Professionnelle</h3>
-                        <p class="text-white/90">Apprendre des métiers durables aux jeunes et aux femmes.</p>
+                        class="hidden lg:block w-3 h-3 rounded-full bg-primary absolute left-1/2 -translate-x-1/2 z-20 ring-8 ring-primary/5 shadow-sm">
                     </div>
-                </a>
-                <a href="nos-projets/bibliotheque-pour-tous/"
-                    class="group relative rounded-3xl overflow-hidden h-96 animate animate-delay-4">
-                    <img src="./assets/img/gazela_hero_madagascar.png" alt="Bibliothèque Pour Tous"
-                        class="w-full h-full object-cover">
+                </div>
+
+                <div
+                    class="group relative flex flex-col lg:flex-row items-center justify-end lg:min-h-[400px] lg:-mt-20">
                     <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/85 to-transparent flex flex-col justify-end p-8 translate-y-5 group-hover:translate-y-0 transition-transform">
-                        <span class="text-xs uppercase font-bold text-white mb-2">BPT</span>
-                        <h3 class="text-white text-2xl font-bold mb-2">Bibliothèque Pour Tous</h3>
-                        <p class="text-white/90">15 points de lecture permanents accessibles gratuitement.</p>
+                        class="hidden lg:block w-3 h-3 rounded-full bg-primary absolute left-1/2 -translate-x-1/2 z-20 ring-8 ring-primary/5 shadow-sm">
                     </div>
-                </a>
+                    <div class="w-full lg:w-1/2 lg:pl-20" data-aos="fade-left">
+                        <a href="nos-projets/projet-tanora-1/"
+                            class="block relative p-12 bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.02)] border border-slate-100 transition-all duration-500 hover:shadow-[0_40px_80px_rgba(26,67,49,0.08)] hover:-translate-y-3">
+                            <div
+                                class="absolute -top-6 -left-6 w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center text-slate-200 text-4xl font-black select-none">
+                                02</div>
+                            <div class="flex items-center gap-3 mb-8">
+                                <span
+                                    class="px-3 py-1 rounded-md bg-slate-800 text-white text-[10px] font-bold uppercase">PTI</span>
+                                <span class="h-px w-8 bg-slate-200"></span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-slate-900 mb-5 leading-tight">Projet Tanora I
+                            </h3>
+                            <p class="text-slate-500 leading-relaxed mb-10 text-lg">Donner les clés de l'autonomie aux
+                                femmes et aux jeunes par l'apprentissage de métiers concrets.</p>
+                            <div class="inline-flex items-center gap-4 text-slate-800 font-bold group/link">
+                                <span
+                                    class="text-sm tracking-tighter uppercase border-b-2 border-transparent group-hover/link:border-slate-800 transition-all">Consulter
+                                    les programmes</span>
+                                <svg class="w-6 h-6 transition-transform group-hover/link:translate-x-2" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div
+                    class="group relative flex flex-col lg:flex-row items-center justify-start lg:min-h-[400px] lg:-mt-20">
+                    <div class="w-full lg:w-1/2 lg:pr-20" data-aos="fade-right">
+                        <a href="nos-projets/formation-professionnelle/"
+                            class="block relative p-12 bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.02)] border border-slate-100 transition-all duration-500 hover:shadow-[0_40px_80px_rgba(26,67,49,0.08)] hover:-translate-y-3">
+                            <div
+                                class="absolute -top-6 -right-6 w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center text-primary/20 text-4xl font-black select-none">
+                                03</div>
+                            <div class="flex items-center gap-3 mb-8">
+                                <span
+                                    class="px-3 py-1 rounded-md bg-emerald-700 text-white text-[10px] font-bold">BPT</span>
+                                <span class="h-px w-8 bg-slate-200"></span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-slate-900 mb-5 leading-tight">Préformations et formations
+                                Professionnelles
+                            </h3>
+                            <p class="text-slate-500 leading-relaxed mb-10 text-lg">Donner les clés de l'autonomie aux
+                                femmes et aux jeunes par l'apprentissage de métiers concrets.</p>
+                            <div class="inline-flex items-center gap-4 text-emerald-700 font-bold group/link">
+                                <span
+                                    class="text-sm tracking-tighter uppercase border-b-2 border-transparent group-hover/link:border-emerald-700 transition-all">Localiser
+                                    un centre</span>
+                                <svg class="w-6 h-6 transition-transform group-hover/link:translate-x-2" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                    <div
+                        class="hidden lg:block w-3 h-3 rounded-full bg-primary absolute left-1/2 -translate-x-1/2 z-20 ring-8 ring-primary/5 shadow-sm">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -533,7 +622,7 @@
                             <p class="text-xs text-gray-500 font-medium">Bénévole Internationale</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 leading-relaxed italic mb-6">"Mon expérience avec Gazela a totalement changé
+                    <p class="text-gray-600 leading-relaxed mb-6">"Mon expérience avec Gazela a totalement changé
                         ma vision du monde. L'accueil des enfants et l'énergie de l'équipe locale sont incroyables."</p>
                 </div>
 
@@ -554,7 +643,7 @@
                             <p class="text-xs text-gray-500 font-medium">Partenaire local</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 leading-relaxed italic mb-6">"En tant que partenaire, j'apprécie la
+                    <p class="text-gray-600 leading-relaxed mb-6">"En tant que partenaire, j'apprécie la
                         transparence et l'efficacité de Gazela. Leurs projets de bibliothèques transforment réellement
                         l'avenir des jeunes."</p>
                 </div>
@@ -576,14 +665,64 @@
                             <p class="text-xs text-gray-500 font-medium">Bénéficiaire</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 leading-relaxed italic mb-6">"Grâce à la bibliothèque ambulante, j'ai
+                    <p class="text-gray-600 leading-relaxed mb-6">"Grâce à la bibliothèque ambulante, j'ai
                         découvert ma passion pour la lecture. Aujourd'hui, je poursuis des études que je n'aurais jamais
                         imaginées."</p>
                 </div>
             </div>
         </div>
     </section>
+    <section class="py-24 bg-white">
+        <div class="max-w-[1200px] mx-auto px-5">
+            <div
+                class="relative bg-[#f1f5f0] rounded-[3rem] p-12 md:p-24 border border-primary/5 shadow-[0_30px_60px_-15px_rgba(26,67,49,0.05)]">
 
+                <div
+                    class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white rounded-3xl shadow-lg border border-primary/5 flex items-center justify-center z-20">
+                    <i class="fa-solid fa-hand-holding-heart text-4xl text-primary"></i>
+                </div>
+
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-emerald-100/40 rounded-full blur-3xl"></div>
+
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-1.5 mb-8 mt-4 rounded-full bg-white shadow-sm border border-primary/10">
+                        <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                        <span class="text-[10px] font-black tracking-[0.2em] uppercase text-primary-dark">Faites partie
+                            du changement</span>
+                    </div>
+
+                    <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">
+                        Ensemble, écrivons le <br>
+                        <span class="text-primary italic font-serif font-light">futur de Madagascar</span>.
+                    </h2>
+
+                    <p class="text-slate-600 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
+                        Chaque initiative, chaque don et chaque minute de bénévolat contribuent à bâtir un avenir
+                        meilleur pour les enfants.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                        <a href="agir-avec-nous/annonces/"
+                            class="group relative inline-flex items-center justify-center px-10 py-5 bg-primary text-white font-bold rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(26,67,49,0.2)]">
+                            <span>Voir les annonces</span>
+                            <svg class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+
+                        <a href="/a-propos/nous-contacter/"
+                            class="inline-flex items-center justify-center px-10 py-5 bg-white border border-slate-200 text-slate-700 font-bold rounded-2xl transition-all duration-300 hover:bg-slate-50 hover:border-slate-300">
+                            Nous contacter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Footer -->
     <footer class="bg-primary-dark text-white py-20">
         <div class="max-w-[1200px] mx-auto px-5">
@@ -642,6 +781,7 @@
         </div>
     </footer>
 
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
