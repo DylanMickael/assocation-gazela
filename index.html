@@ -13,6 +13,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/animations.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./assets/js/taiwind.config.js"></script>
     <script src="./assets/js/head.js"></script>
@@ -377,7 +379,7 @@
     </section>
 
     <!-- Core Values Cards -->
-    <section class="-mt-24 relative z-10 px-5">
+    <section class="-mt-12 relative z-10 px-5">
         <div class="max-w-[1200px] mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-white p-10 rounded-2xl shadow-lg hover:-translate-y-2 transition-all animate">
@@ -490,6 +492,94 @@
                         <p class="text-white/90">15 points de lecture permanents accessibles gratuitement.</p>
                     </div>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="max-w-[1200px] mx-auto px-5">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div class="max-w-2xl">
+                    <span class="text-primary text-xs font-bold uppercase tracking-[4px] mb-3 block">TÉMOIGNAGES</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-primary-dark leading-tight">L'impact de nos
+                        actions à travers <span class="text-primary">leurs voix</span></h2>
+                </div>
+                <a href="temoignage/success-stories/"
+                    class="group flex items-center gap-3 text-primary font-bold hover:text-primary-dark transition-colors">
+                    Voir plus de témoignages
+                    <span
+                        class="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div
+                    class="bg-bg-light p-8 rounded-[2.5rem] relative group hover:bg-white hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 border border-transparent hover:border-primary/10 animate">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="relative">
+                            <img src="./assets/img/testimonial_1.png" alt="Volunteer"
+                                class="w-16 h-16 rounded-2xl object-cover shadow-lg group-hover:scale-110 transition-transform duration-500">
+                            <div
+                                class="absolute -bottom-2 -right-2 w-6 h-6 bg-accent rounded-lg flex items-center justify-center text-white text-[10px]">
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary-dark">Sarah R.</h4>
+                            <p class="text-xs text-gray-500 font-medium">Bénévole Internationale</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed italic mb-6">"Mon expérience avec Gazela a totalement changé
+                        ma vision du monde. L'accueil des enfants et l'énergie de l'équipe locale sont incroyables."</p>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div
+                    class="bg-bg-light p-8 rounded-[2.5rem] relative group hover:bg-white hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 border border-transparent hover:border-primary/10 animate animate-delay-2">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="relative">
+                            <img src="./assets/img/testimonial_2.png" alt="Local team"
+                                class="w-16 h-16 rounded-2xl object-cover shadow-lg group-hover:scale-110 transition-transform duration-500">
+                            <div
+                                class="absolute -bottom-2 -right-2 w-6 h-6 bg-primary rounded-lg flex items-center justify-center text-white text-[10px]">
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary-dark">Jean-Luc S.</h4>
+                            <p class="text-xs text-gray-500 font-medium">Partenaire local</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed italic mb-6">"En tant que partenaire, j'apprécie la
+                        transparence et l'efficacité de Gazela. Leurs projets de bibliothèques transforment réellement
+                        l'avenir des jeunes."</p>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div
+                    class="bg-bg-light p-8 rounded-[2.5rem] relative group hover:bg-white hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 border border-transparent hover:border-primary/10 animate animate-delay-4">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="relative">
+                            <img src="./assets/img/testimonial_3.png" alt="Student"
+                                class="w-16 h-16 rounded-2xl object-cover shadow-lg group-hover:scale-110 transition-transform duration-500">
+                            <div
+                                class="absolute -bottom-2 -right-2 w-6 h-6 bg-primary-light rounded-lg flex items-center justify-center text-white text-[10px]">
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary-dark">Andry T.</h4>
+                            <p class="text-xs text-gray-500 font-medium">Bénéficiaire</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed italic mb-6">"Grâce à la bibliothèque ambulante, j'ai
+                        découvert ma passion pour la lecture. Aujourd'hui, je poursuis des études que je n'aurais jamais
+                        imaginées."</p>
+                </div>
             </div>
         </div>
     </section>

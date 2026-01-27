@@ -14,8 +14,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/animations.css">
+    <link rel="stylesheet" href="../../assets/vendors/toastify.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="../../assets/vendors/toastify.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../assets/js/taiwind.config.js"></script>
     <script src="../../assets/js/head.js"></script>
@@ -564,36 +566,39 @@
                     <div class="space-y-2">
                         <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Nom et
                             Prénom</label>
-                        <input type="text"
+                        <input type="text" name="prenom"
                             class="w-full p-4 border border-gray-100 bg-gray-50 rounded-xl text-base transition-all focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10"
                             required>
                     </div>
                     <div class="space-y-2">
                         <label
                             class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">E-mail</label>
-                        <input type="email"
+                        <input type="email" name="email"
                             class="w-full p-4 border border-gray-100 bg-gray-50 rounded-xl text-base transition-all focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10"
                             required>
                     </div>
                     <div class="space-y-2">
                         <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Adresse
                             (optionnel)</label>
-                        <input type="text"
+                        <input type="text" name="addresse"
                             class="w-full p-4 border border-gray-100 bg-gray-50 rounded-xl text-base transition-all focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10">
                     </div>
-                    <div class="space-y-2">
+
+                    <div class="space-y-2" x-data="{ fileName: '' }">
                         <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Déposer un
                             document</label>
-                        <div
-                            class="file-upload group border-2 border-dashed border-gray-200 rounded-2xl p-8 text-center transition-all hover:border-primary hover:bg-primary/5 cursor-pointer">
-                            <input type="file" class="hidden" id="id-upload">
-                            <label for="id-upload" class="cursor-pointer">
-                                <div
-                                    class="w-16 h-16 bg-gray-100 text-gray-400 group-hover:bg-primary/10 group-hover:text-primary rounded-full flex items-center justify-center text-2xl mx-auto mb-4 transition-all">
-                                    <i class="fas fa-id-card"></i>
+                        <div class="file-upload group border-2 border-dashed rounded-2xl p-8 text-center transition-all hover:border-primary hover:bg-primary/5 cursor-pointer"
+                            :class="fileName ? 'border-green-500 bg-green-50' : 'border-gray-200'">
+                            <input type="file" class="hidden" id="prop-upload" name="document"
+                                @change="fileName = $event.target.files[0]?.name || ''">
+                            <label for="prop-upload" class="cursor-pointer">
+                                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 transition-all"
+                                    :class="fileName ? 'bg-green-100 text-green-500' : 'text-gray-400 group-hover:bg-primary/10 group-hover:text-primary'">
+                                    <i class="fas" :class="fileName ? 'fa-check-circle' : 'fa-folder-open'"></i>
                                 </div>
-                                <span class="font-bold text-gray-500 group-hover:text-primary transition-colors">Pièce
-                                    d'identité ou autre</span>
+                                <span class="font-bold transition-colors"
+                                    :class="fileName ? 'text-green-600' : 'text-gray-500 group-hover:text-primary'"
+                                    x-text="fileName || 'Pièces d\'identité ou autres'"></span>
                             </label>
                         </div>
                     </div>
@@ -664,6 +669,8 @@
             </div>
         </div>
     </footer>
+    <script src="../../assets/js/email.min.js"></script>
+    <script src="../../assets/js/send-email.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
 

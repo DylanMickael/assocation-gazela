@@ -10,6 +10,11 @@
     }
 }
 
+html,
+body {
+    scroll-behavior: smooth !important;
+}
+
 .animate {
     animation: fadeInUp 0.8s ease forwards;
 }
