@@ -7,14 +7,14 @@ document.addEventListener('alpine:init', () => {
                 role: "Bénéficiaire Gazela",
                 numero: "Success Story #1",
                 citation: "Gazela me donne de la force, me pousse à être plus positif, me donne des leçons de vie comme le fait d'assumer davantage mes responsabilités.",
-                image: "../../assets/img/gazela_hero_madagascar.png"
+                image: "../../assets/img/hero.jpg"
             },
             {
                 nom: "Fano ANDRIAMANANA",
                 role: "Bénéficiaire Gazela",
                 numero: "Success Story #2",
                 citation: "Grâce à l'accompagnement, j'ai pu redéfinir mes objectifs professionnels et retrouver confiance.",
-                image: "../../assets/img/gazela_hero_madagascar.png"
+                image: "../../assets/img/hero.jpg"
             }
         ],
         next() {

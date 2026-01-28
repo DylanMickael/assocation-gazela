@@ -2,7 +2,7 @@
     const siteConfig = {
         titleSuffix: " | Association Gazela",
         description: "L'association Gazela œuvre pour l'éducation, la culture et le développement social des enfants et jeunes à Madagascar depuis 2011.",
-        image: window.location.origin + "/assets/img/gazela_hero_madagascar.png",
+        image: window.location.origin + "/assets/img/hero.jpg",
         url: window.location.origin + "/",
         email: "association.gazela@gmail.com"
     };
