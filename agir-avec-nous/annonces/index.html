@@ -23,8 +23,7 @@
 </head>
 
 <body>
-    <nav class="sticky bg-white/95 backdrop-blur-md top-0 z-[100] border-b border-gray-100 transition-all duration-300"
-        id="navbar">
+    <nav class="sticky bg-white/95 backdrop-blur-md top-0 z-[100] transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <!-- Logo -->
@@ -299,7 +298,7 @@
         <div class="max-w-4xl animate px-5">
             <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">Nos <span
                     class="text-primary-light border-b-8 border-primary-light/30">annonces</span></h1>
-            <p class="text-xl md:text-2xl opacity-90">Opportunités de bénévolat et besoins actuels.</p>
+            <p class="text-lg md:text-xl opacity-90">Opportunités de bénévolat et besoins actuels.</p>
         </div>
     </section>
 
@@ -328,7 +327,8 @@
                 class="text-center py-20 bg-white rounded-3xl shadow-inner border-2 border-dashed border-gray-200">
                 <div class="text-6xl mb-4">🔍</div>
                 <h3 class="text-2xl font-bold text-gray-800">Aucun poste trouvé</h3>
-                <button @click="search = ''" class="mt-6 text-primary font-bold underline">Effacer la recherche</button>
+                <button @click="search = ''" class="mt-6 text-primary font-bold underline">Effacer la
+                    recherche</button>
             </div>
 
             <template x-for="(groupAnnonces, monthYear) in filteredGroups" :key="monthYear">
@@ -371,7 +371,8 @@
 
             <div x-intersect="loadMore()" class="py-10 flex justify-center">
                 <template x-if="loadingMore">
-                    <div class="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                    <div class="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin">
+                    </div>
                 </template>
             </div>
         </div>
@@ -406,11 +407,12 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-primary-dark text-white py-20">
+    <footer class="bg-gray-800 text-white py-20">
         <div class="max-w-[1200px] mx-auto px-5">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16">
                 <div> <span class="text-3xl font-extrabold block mb-5">Gazela</span>
-                    <p class="opacity-70 mb-8">Association loi 1901 œuvrant pour le développement social et l'éducation
+                    <p class="opacity-70 mb-8">Association loi 1901 œuvrant pour le développement social et
+                        l'éducation
                         des enfants à Madagascar depuis 2011.</p>
                 </div>
                 <div>
